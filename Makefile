@@ -16,3 +16,9 @@ migrations:
 
 start:
 	poetry run gunicorn -w $(WEB_CONCURRENCY) -b $(HOST):$(PORT) task_manager.wsgi:application
+
+lint:
+	poetry run flake8 task_manager
+
+build:
+	./build.sh
