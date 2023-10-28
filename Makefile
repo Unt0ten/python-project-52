@@ -1,4 +1,3 @@
-HOST ?= 127.0.0.1
 PORT ?= 8000
 WEB_CONCURRENCY ?= 4
 
@@ -15,7 +14,7 @@ migrations:
 	python manage.py makemigrations
 
 start:
-	poetry run gunicorn -w $(WEB_CONCURRENCY) -b $(HOST):$(PORT) task_manager.wsgi:application
+	poetry run gunicorn -w $(WEB_CONCURRENCY) -b $0.0.0.0:$(PORT) task_manager.wsgi:application
 
 lint:
 	poetry run flake8 task_manager
