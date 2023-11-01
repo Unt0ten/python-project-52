@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-01 17:37+0700\n"
+"POT-Creation-Date: 2023-11-01 22:15+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,27 +20,31 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: templates/index.html:10 templates/index.html:60
-msgid "Task Manager"
-msgstr "Менеджер задач"
+#: templates/footer.html:6
+msgid "Made by"
+msgstr "Выполнил"
 
-#: templates/index.html:49
+#: templates/header.html:8
 msgid "Home"
 msgstr "Главная"
 
-#: templates/index.html:50
+#: templates/header.html:9 templates/users/index.html:8
 msgid "Users"
 msgstr "Пользователи"
 
-#: templates/index.html:53
+#: templates/header.html:12
 msgid "Entrance"
 msgstr "Войти"
 
-#: templates/index.html:54
+#: templates/header.html:13
 msgid "Registration"
 msgstr "Регистрация"
 
-#: templates/index.html:62
+#: templates/index.html:7 templates/layout.html:10
+msgid "Task Manager"
+msgstr "Менеджер задач"
+
+#: templates/index.html:9
 msgid ""
 "A task management system that allows you to set tasks, assign performers and "
 "change their statuses. To work with the system you need registration and "
@@ -50,6 +54,22 @@ msgstr ""
 "исполнителей и менять их статусы. Для работы с системой требуется "
 "регистрация и аутентификация."
 
-#: templates/index.html:67
-msgid "Made by"
-msgstr "Выполнил"
+#: templates/users/index.html:13
+msgid "User name"
+msgstr "Имя пользователя"
+
+#: templates/users/index.html:14
+msgid "Full name"
+msgstr "Полное имя"
+
+#: templates/users/index.html:15
+msgid "Date of creation"
+msgstr "Дата создания"
+
+#: templates/users/index.html:28
+msgid "Сhange"
+msgstr "Изменить"
+
+#: templates/users/index.html:30
+msgid "Delete"
+msgstr "Удалить"

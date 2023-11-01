@@ -8,10 +8,7 @@ shell:
 	poetry run python manage.py shell
 
 migrate:
-	poetry run python manage.py migrate
-
-migrations:
-	python manage.py makemigrations
+	poetry run python manage.py makemigrations && poetry run python manage.py migrate
 
 start:
 	poetry run gunicorn -w $(WEB_CONCURRENCY) -b 0.0.0.0:$(PORT) task_manager.wsgi:application
@@ -23,5 +20,5 @@ build:
 	./build.sh
 
 compile:
-	poetry run django-admin makemessages -a ru && poetry run django-admin compilemessages --ignore=.venv
+	cd task_manager && poetry run django-admin makemessages -l ru && poetry run django-admin compilemessages --ignore=venv
 

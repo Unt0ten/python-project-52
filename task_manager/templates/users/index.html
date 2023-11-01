@@ -3,5 +3,36 @@
 {% load static %}
 
 {% block main %}
-  <h1>Здесь должны быть пользователи</h1>
+<div class="container wrapper flex-grow-1">
+  <main class="px-3">
+    <h1 class="my-4 float-lg-start">{% translate 'Users' %}</h1>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th class="fw-bold py-2 px-md-4 text-light">ID</th>
+        <th class="fw-bold py-2 px-md-4 text-light">{% translate 'User name' %}</th>
+        <th class="fw-bold py-2 px-md-4 text-light">{% translate 'Full name' %}</th>
+        <th class="fw-bold py-2 px-md-4 text-light">{% translate 'Date of creation' %}</th>
+        <th class="fw-bold py-2 px-md-4 text-light"></th>
+      </tr>
+      </thead>
+
+      {% for user in users %}
+      <tbody>
+      <tr>
+        <td class="fw-bold py-1 px-md-2 text-light">{{ user.id }}</td>
+        <td class="fw-bold py-1 px-md-2 text-light">{{ user.nickname }}</td>
+        <td class="fw-bold py-1 px-md-2 text-light">{{ user.firs_name }} {{ user.last_name }}</td>
+        <td class="fw-bold py-1 px-md-2 text-light">{{ user.timestamp }}</td>
+        <td class="fw-bold py-1 px-md-2 text-light">
+          <a href="#">{% translate 'Сhange' %}</a>
+          <br>
+          <a href="#">{% translate 'Delete' %}</a>
+        </td>
+      </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+  </main>
+</div>
 {% endblock main %}
