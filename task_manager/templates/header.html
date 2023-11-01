@@ -6,11 +6,11 @@
     <div>
       <nav class="nav nav-masthead justify-content-center float-lg-start">
         <a class="nav-link fw-bold py-2 px-md-4 text-light" aria-current="page" href="{% url 'index' %}">{% translate 'Home' %}</a>
-        <a class="nav-link fw-bold py-2 px-md-4 text-white-50" href="#">{% translate 'Users' %}</a>
+        <a class="nav-link fw-bold py-2 px-md-4 text-white-50" href="{% url 'users' %}">{% translate 'Users' %}</a>
       </nav>
       <nav class="nav nav-masthead justify-content-center float-md-end">
         <a class="nav-link fw-bold py-2 px-md-3 text-white-50" href="#">{% translate 'Entrance' %}</a>
-        <a class="nav-link fw-bold py-2 px-md-3 text-white-50" href="#">{% translate 'Registration' %}</a>
+        <a class="nav-link fw-bold py-2 px-md-3 text-white-50" href="{% url 'create_user' %}">{% translate 'Registration' %}</a>
       </nav>
     </div>
   </header>
