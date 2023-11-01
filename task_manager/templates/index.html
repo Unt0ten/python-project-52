@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
-<h1>Hello, World!</h1>
-</body>
-</html>
+{% extends 'layout.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block main %}
+  <main class="px-3">
+    <h1>{% translate 'Task Manager' %}</h1>
+    <p class="lead">
+      {% translate 'A task management system that allows you to set tasks, assign performers and change their statuses. To work with the system you need registration and authentication.' %}
+    </p>
+  </main>
+{% endblock main %}
