@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block main %}
+
+    <h1 class="my-4 ">Удаление пользователя</h1>
+    <p>Вы действительно хотите удалить пользователя {{ user.username }}?</p>
+
+    <form action="{% url 'delete_user' user.id %}" method="post">
+      {% csrf_token %}
+      <input class="btn btn-info my-2" type="submit" value="Удалить">
+    </form>
+
+{% endblock %}
