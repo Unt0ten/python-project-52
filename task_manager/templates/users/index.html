@@ -1,9 +1,9 @@
 {% extends 'layout.html' %}
 {% load i18n %}
 {% load static %}
-
+{% block title %}{% translate 'Users' %}{% endblock %}
 {% block main %}
-<div class="container wrapper flex-grow-1">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
   <main class="px-3">
     <h1 class="my-4 float-lg-start">{% translate 'Users' %}</h1>
     <table class="table table-striped">
@@ -22,8 +22,8 @@
       <tr>
         <td class="fw-bold py-1 px-md-2 text-light">{{ user.id }}</td>
         <td class="fw-bold py-1 px-md-2 text-light">{{ user.username }}</td>
-        <td class="fw-bold py-1 px-md-2 text-light">{{ user.first_name }} {{ user.last_name }}</td>
-        <td class="fw-bold py-1 px-md-2 text-light">{{ user.timestamp }}</td>
+        <td class="fw-bold py-1 px-md-2 text-light">{{ user.get_full_name }}</td>
+        <td class="fw-bold py-1 px-md-2 text-light">{{ user.date_joined }}</td>
         <td class="fw-bold py-1 px-md-2 text-light">
           <a class="" href="{% url 'update_user' user.id %}">{% translate 'Сhange' %}</a>
           <br>

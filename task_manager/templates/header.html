@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block header %}
+
 <header class="mb-auto">
   <div>
     <nav class="nav nav-masthead justify-content-center float-lg-start">
@@ -19,7 +20,6 @@
       <a class="nav-link fw-bold py-2 px-md-3 text-white-50" href="{% url 'logout' %}">{% translate 'Logout' %}</a>
     </nav>
     {% endif %}
-
   </div>
 </header>
 {% endblock header %}

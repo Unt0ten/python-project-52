@@ -1,26 +1,27 @@
 {% extends 'layout.html' %}
 {% load i18n %}
 {% load static %}
-
+{% block title %}{% translate 'Login' %}{% endblock %}
 {% block main %}
+
 <div class="container wrapper">
-  <h1 class="my-4 float-lg-start">Вход</h1>
+  <h1 class="my-4 float-lg-start">{% translate 'Entrance' %}</h1>
 </div>
 <div class="container wrapper flex-grow-1">
   <form action="{% url 'login' %}" method="post">
     {% csrf_token %}
-    <div class="mb-3"><label class="form-label" for="id_username">Имя пользователя</label><input type="text" name="username"
+    <div class="mb-3"><label class="form-label" for="id_username">{% translate 'Username' %}</label><input type="text" name="username"
                                                                                       maxlength="150"
                                                                                       class="form-control"
                                                                                       placeholder="Имя пользователя" required
                                                                                       id="id_username"></div>
-    <div class="mb-3"><label class="form-label" for="id_password">Пароль</label><input type="password" name="password"
+    <div class="mb-3"><label class="form-label" for="id_password">{% translate 'Password' %}</label><input type="password" name="password"
                                                                                         autocomplete="new-password"
                                                                                         class="form-control"
                                                                                         placeholder="Пароль" required
                                                                                         id="id_password">
     </div>
-    <input class="btn btn-info my-2" type="submit" value="Войти">
+    <input class="btn btn-info my-2" type="submit" value="{% translate 'To come in' %}">
   </form>
 </div>
 {% endblock main %}

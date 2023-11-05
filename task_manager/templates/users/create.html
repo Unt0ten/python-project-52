@@ -2,10 +2,12 @@
 {% load i18n %}
 {% load static %}
 
+{% block title %}{% translate 'Registration' %}{% endblock %}
+
 {% block main %}
 
 <div class="container wrapper">
-  <h1 class="my-4 float-lg-start">Регистрация</h1>
+  <h1 class="my-4 float-lg-start">{% translate 'Registration' %}</h1>
 </div>
 <div class="container wrapper flex-grow-1">
 
@@ -13,46 +15,46 @@
   <form action="{% url 'create_user' %}" method="post">
     {% csrf_token %}
 
-    <div class="mb-3"><label class="form-label" for="id_first_name">Имя</label><input type="text" name="first_name"
+    <div class="mb-3"><label class="form-label" for="id_first_name">{% translate 'Fist name' %}</label><input type="text" name="first_name"
                                                                                       maxlength="150"
                                                                                       class="form-control"
-                                                                                      placeholder="Имя" required
+                                                                                      placeholder="{% translate 'Fist name' %}" required
                                                                                       id="id_first_name"></div>
-    <div class="mb-3"><label class="form-label" for="id_last_name">Фамилия</label><input type="text" name="last_name"
+    <div class="mb-3"><label class="form-label" for="id_last_name">{% translate 'Last name' %}</label><input type="text" name="last_name"
                                                                                          maxlength="150"
                                                                                          class="form-control"
-                                                                                         placeholder="Фамилия" required
+                                                                                         placeholder="{% translate 'Last name' %}" required
                                                                                          id="id_last_name"></div>
-    <div class="mb-3"><label class="form-label" for="id_username">Имя пользователя</label><input type="text"
+    <div class="mb-3"><label class="form-label" for="id_username">{% translate 'Username' %}</label><input type="text"
                                                                                                  name="username"
                                                                                                  maxlength="150"
                                                                                                  autofocus
                                                                                                  class="form-control"
-                                                                                                 placeholder="Имя пользователя"
+                                                                                                 placeholder="{% translate 'Username' %}"
                                                                                                  required
                                                                                                  id="id_username">
-      <div class="form-text">Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./+/-/_.</div>
+      <div class="form-text">{% translate 'Obligatory field. No more than 150 characters. Only letters, numbers and symbols @/./+/-/_.' %}</div>
     </div>
 
-    <div class="mb-3"><label class="form-label" for="id_password">Пароль</label><input type="password" name="password"
+    <div class="mb-3"><label class="form-label" for="id_password">{% translate 'Password' %}</label><input type="password" name="password"
                                                                                         autocomplete="new-password"
                                                                                         class="form-control"
-                                                                                        placeholder="Пароль" required
+                                                                                        placeholder="{% translate 'Password' %}" required
                                                                                         id="id_password">
       <div class="form-text">
-        Ваш пароль должен содержать как минимум 3 символа.
+        {% translate 'Your password must contain at least 3 characters.' %}
       </div>
     </div>
-    <div class="mb-3"><label class="form-label" for="id_password_confirmation">Подтверждение пароля</label><input type="password"
+    <div class="mb-3"><label class="form-label" for="id_password_confirmation">{% translate 'Password confirmation' %}</label><input type="password"
                                                                                                       name="password_confirmation"
                                                                                                       autocomplete="new-password"
                                                                                                       class="form-control"
-                                                                                                      placeholder="Подтверждение пароля"
+                                                                                                      placeholder="{% translate 'Password confirmation' %}"
                                                                                                       required
                                                                                                       id="id_password_confirmation">
-      <div class="form-text">Для подтверждения введите, пожалуйста, пароль ещё раз.</div>
+      <div class="form-text">{% translate 'To confirm, please enter your password again.' %}</div>
     </div>
-    <input class="btn btn-info my-2" type="submit" value="Зарегистрировать">
+    <input class="btn btn-info my-2" type="submit" value="{% translate 'Register' %}">
   </form>
 </div>
 

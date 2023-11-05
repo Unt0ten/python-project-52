@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
-  {% block title %}<title>{% translate 'Task Manager' %}</title>{% endblock title %}
+  <title>{% block title %}{% translate 'Task Manager' %}{% endblock title %}</title>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/cover/">
 
@@ -46,9 +46,10 @@
   {% include 'header.html' %}
   {% include 'messages.html' %}
 
-  {% block main %} {% endblock main %}
+  {% block main %}
+  {% endblock main %}
 
-  {% include 'footer.html' %}
+{% include 'footer.html' %}
 
 </div>
 
