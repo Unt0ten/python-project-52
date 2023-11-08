@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-05 10:31+0700\n"
+"POT-Creation-Date: 2023-11-08 07:29+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,12 +71,12 @@ msgid "Last name"
 msgstr "Фамилия"
 
 #: templates/users/create.html:28 templates/users/create.html:33
-#: templates/users/login.html:13 templates/users/update.html:27
+#: templates/users/login.html:21 templates/users/update.html:27
 #: templates/users/update.html:33
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: templates/users/create.html:36 templates/users/update.html:36
+#: templates/users/create.html:40 templates/users/update.html:39
 msgid ""
 "Obligatory field. No more than 150 characters. Only letters, numbers and "
 "symbols @/./+/-/_."
@@ -84,26 +84,26 @@ msgstr ""
 "Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./"
 "+/-/_."
 
-#: templates/users/create.html:39 templates/users/create.html:42
-#: templates/users/login.html:18 templates/users/update.html:39
-#: templates/users/update.html:42
+#: templates/users/create.html:43 templates/users/create.html:46
+#: templates/users/login.html:26 templates/users/update.html:42
+#: templates/users/update.html:45
 msgid "Password"
 msgstr "Пароль"
 
-#: templates/users/create.html:45 templates/users/update.html:45
+#: templates/users/create.html:49 templates/users/update.html:48
 msgid "Your password must contain at least 3 characters."
 msgstr "Ваш пароль должен содержать как минимум 3 символа."
 
-#: templates/users/create.html:48 templates/users/create.html:52
-#: templates/users/update.html:48 templates/users/update.html:52
+#: templates/users/create.html:52 templates/users/create.html:56
+#: templates/users/update.html:51 templates/users/update.html:55
 msgid "Password confirmation"
 msgstr "Подтверждение пароля"
 
-#: templates/users/create.html:55 templates/users/update.html:55
+#: templates/users/create.html:62 templates/users/update.html:61
 msgid "To confirm, please enter your password again."
 msgstr "Для подтверждения введите пароль еще раз."
 
-#: templates/users/create.html:57
+#: templates/users/create.html:64
 msgid "Register"
 msgstr "Регистрация"
 
@@ -139,7 +139,7 @@ msgstr "Изменить"
 msgid "Login"
 msgstr "Авторизация"
 
-#: templates/users/login.html:24
+#: templates/users/login.html:32
 msgid "To come in"
 msgstr "Войти"
 
@@ -147,30 +147,34 @@ msgstr "Войти"
 msgid "Change user"
 msgstr "Изменение пользователя"
 
-#: templates/users/update.html:57
+#: templates/users/update.html:63
 msgid "Change"
 msgstr "Изменить"
 
-#: users/views.py:32
-msgid "A user with the same name already exists."
-msgstr "Пользователь с таким именем уже существует"
-
-#: users/views.py:42
+#: users/views.py:34
 msgid "Your profile has been successfully created!"
 msgstr "Ваш профиль успешно создан!"
 
-#: users/views.py:48
-msgid "Сheck the correctness of data entry."
-msgstr "Проверьте корректность введенных данных."
-
-#: users/views.py:71
+#: users/views.py:59
 msgid "User successfully changed"
 msgstr "Пользователь успешно изменен!"
 
-#: users/views.py:97
+#: users/views.py:85
 msgid "User deleted successfully!"
 msgstr "Пользователь успешно удален!"
 
-#: views.py:16
+#: users/views.py:103
 msgid "You are logged in"
 msgstr "Вы авторизованы"
+
+#: users/views.py:110
+#, fuzzy
+#| msgid "You are logged in"
+msgid "You are logged out"
+msgstr "Вы авторизованы"
+
+#~ msgid "A user with the same name already exists."
+#~ msgstr "Пользователь с таким именем уже существует"
+
+#~ msgid "Сheck the correctness of data entry."
+#~ msgstr "Проверьте корректность введенных данных."

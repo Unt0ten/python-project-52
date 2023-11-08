@@ -33,25 +33,32 @@
                                                                                                  placeholder="{% translate 'Username' %}"
                                                                                                  required
                                                                                                  id="id_username">
+
+      {% if form.errors %}
+        <div class="text-danger">{{ form.username.errors }}</div>
+      {% endif %}
       <div class="form-text">{% translate 'Obligatory field. No more than 150 characters. Only letters, numbers and symbols @/./+/-/_.' %}</div>
     </div>
 
-    <div class="mb-3"><label class="form-label" for="id_password">{% translate 'Password' %}</label><input type="password" name="password"
+    <div class="mb-3"><label class="form-label" for="id_password1">{% translate 'Password' %}</label><input type="password" name="password1"
                                                                                         autocomplete="new-password"
                                                                                         class="form-control"
                                                                                         placeholder="{% translate 'Password' %}" required
-                                                                                        id="id_password">
+                                                                                        id="id_password1">
       <div class="form-text">
         {% translate 'Your password must contain at least 3 characters.' %}
       </div>
     </div>
-    <div class="mb-3"><label class="form-label" for="id_password_confirmation">{% translate 'Password confirmation' %}</label><input type="password"
-                                                                                                      name="password_confirmation"
+    <div class="mb-3"><label class="form-label" for="id_password2">{% translate 'Password confirmation' %}</label><input type="password"
+                                                                                                      name="password2"
                                                                                                       autocomplete="new-password"
                                                                                                       class="form-control"
                                                                                                       placeholder="{% translate 'Password confirmation' %}"
                                                                                                       required
-                                                                                                      id="id_password_confirmation">
+                                                                                                      id="id_password2">
+      {% if form.errors %}
+        <div class="text-danger">{{ form.password2.errors }}</div>
+      {% endif %}
       <div class="form-text">{% translate 'To confirm, please enter your password again.' %}</div>
     </div>
     <input class="btn btn-info my-2" type="submit" value="{% translate 'Register' %}">

@@ -33,6 +33,9 @@
                                                                                                    placeholder="{% translate 'Username' %}"
                                                                                                    required
                                                                                                    id="id_username">
+        {% if form.errors %}
+          <div class="text-danger">{{ form.username.errors }}</div>
+        {% endif %}
         <div class="form-text">{% translate 'Obligatory field. No more than 150 characters. Only letters, numbers and symbols @/./+/-/_.' %}</div>
       </div>
 
@@ -52,6 +55,9 @@
                                                                                                         placeholder="{% translate 'Password confirmation' %}"
                                                                                                         required
                                                                                                         id="id_password_confirmation">
+      {% if form.errors %}
+        <div class="text-danger">{{ form.password2.errors }}</div>
+      {% endif %}
         <div class="form-text">{% translate 'To confirm, please enter your password again.' %}</div>
       </div>
       <input class="btn btn-info my-2" type="submit" value="{% translate 'Change' %}">

@@ -1,21 +1,25 @@
-from django import forms
-from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+
+from .models import CustomUser
 
 
-class UserForm(forms.ModelForm):
-    password = forms.CharField()
-    password_confirmation = forms.CharField()
+class CustomUserCreationForm(UserCreationForm):
 
     class Meta:
-        model = User
+        model = CustomUser
         fields = [
             'first_name',
             'last_name',
             'username',
         ]
 
-    def clean_password_confirmation(self):
-        cd = self.cleaned_data
-        if cd['password'] != cd['password_confirmation']:
-            raise forms.ValidationError('Passwords don\'t match.')
-        return cd['password_confirmation']
+
+class CustomUserChangeForm(UserChangeForm):
+
+    class Meta:
+        model = CustomUser
+        fields = [
+            'first_name',
+            'last_name',
+            'username',
+        ]
