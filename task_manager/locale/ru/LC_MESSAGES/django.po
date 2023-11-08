@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-08 07:29+0700\n"
+"POT-Creation-Date: 2023-11-08 22:50+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -151,27 +151,25 @@ msgstr "Изменение пользователя"
 msgid "Change"
 msgstr "Изменить"
 
-#: users/views.py:34
+#: users/views.py:38
 msgid "Your profile has been successfully created!"
 msgstr "Ваш профиль успешно создан!"
 
-#: users/views.py:59
+#: users/views.py:63
 msgid "User successfully changed"
 msgstr "Пользователь успешно изменен!"
 
-#: users/views.py:85
+#: users/views.py:89
 msgid "User deleted successfully!"
 msgstr "Пользователь успешно удален!"
 
-#: users/views.py:103
+#: users/views.py:107
 msgid "You are logged in"
 msgstr "Вы авторизованы"
 
-#: users/views.py:110
-#, fuzzy
-#| msgid "You are logged in"
+#: users/views.py:114
 msgid "You are logged out"
-msgstr "Вы авторизованы"
+msgstr "Вы вышли из системы"
 
 #~ msgid "A user with the same name already exists."
 #~ msgstr "Пользователь с таким именем уже существует"
