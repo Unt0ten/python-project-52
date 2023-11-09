@@ -5,6 +5,7 @@ from django.utils.translation import gettext as _
 
 
 class CustomUserPassesTestMixin(UserPassesTestMixin):
+
     def test_func(self):
         user_id = self.kwargs.get('pk')
         return self.request.user.pk == user_id
