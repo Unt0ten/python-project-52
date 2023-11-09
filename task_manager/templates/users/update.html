@@ -36,7 +36,7 @@
         {% if form.errors %}
           <div class="text-danger">{{ form.username.errors }}</div>
         {% endif %}
-        <div class="form-text">{% translate 'Obligatory field. No more than 150 characters. Only letters, numbers and symbols @/./+/-/_.' %}</div>
+        <div class="form-text">{{ form.username.help_text }}</div>
       </div>
 
       <div class="mb-3"><label class="form-label" for="id_password">{% translate 'Password' %}</label><input type="password" name="password"
@@ -45,7 +45,7 @@
                                                                                           placeholder="{% translate 'Password' %}" required
                                                                                           id="id_password">
         <div class="form-text">
-          {% translate 'Your password must contain at least 3 characters.' %}
+          {{ form.password1.help_text }}
         </div>
       </div>
       <div class="mb-3"><label class="form-label" for="id_password_confirmation">{% translate 'Password confirmation' %}</label><input type="password"
@@ -58,7 +58,7 @@
       {% if form.errors %}
         <div class="text-danger">{{ form.password2.errors }}</div>
       {% endif %}
-        <div class="form-text">{% translate 'To confirm, please enter your password again.' %}</div>
+        <div class="form-text">{{ form.password2.help_text }}</div>
       </div>
       <input class="btn btn-info my-2" type="submit" value="{% translate 'Change' %}">
     </form>
