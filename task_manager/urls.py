@@ -19,13 +19,13 @@ from django.urls import path, include
 from task_manager import views
 from django.conf.urls.static import static
 from django.conf import settings
-from .users import views as view
+from .users import views as auth
 
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('users/', include('task_manager.users.urls')),
-    path('login/', view.LoginUser.as_view(), name='login'),
-    path('logout/', view.LoginUser.logout_user, name='logout'),
+    path('login/', auth.LoginUser.as_view(), name='login'),
+    path('logout/', auth.LoginUser.logout_user, name='logout'),
     path('admin/', admin.site.urls),
 ]
 
