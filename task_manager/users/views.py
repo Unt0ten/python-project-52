@@ -8,6 +8,7 @@ from django.utils.translation import gettext as _
 
 from .models import CustomUser
 from .forms import CustomUserCreationForm, CustomUserChangeForm
+from .mixins import CustomUserPassesTestMixin
 
 
 class CustomUsersView(View):
@@ -38,13 +39,12 @@ class UserFormCreateView(View):
         return render(request, 'users/create.html', {'form': user_form})
 
 
-class UserFormUpdateView(LoginRequiredMixin, View):
+class UserFormUpdateView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
 
     login_url = 'login/'
-    permission_denied_message = "swd"
 
     def get(self, request, *args, **kwargs):
-        user_id = kwargs.get('id')
+        user_id = kwargs.get('pk')
         user = CustomUser.objects.get(id=user_id)
         form = CustomUserChangeForm(instance=user)
         return render(
@@ -54,7 +54,7 @@ class UserFormUpdateView(LoginRequiredMixin, View):
         )
 
     def post(self, request, *args, **kwargs):
-        user_id = kwargs.get('id')
+        user_id = kwargs.get('pk')
         user = CustomUser.objects.get(id=user_id)
         form = CustomUserChangeForm(request.POST, instance=user)
         if form.is_valid():
@@ -68,12 +68,12 @@ class UserFormUpdateView(LoginRequiredMixin, View):
         )
 
 
-class UserFormDeleteView(LoginRequiredMixin, View):
+class UserFormDeleteView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
 
     login_url = 'login/'
 
     def get(self, request, *args, **kwargs):
-        user_id = kwargs.get('id')
+        user_id = kwargs.get('pk')
         user = CustomUser.objects.get(id=user_id)
         return render(
             request,
@@ -82,7 +82,7 @@ class UserFormDeleteView(LoginRequiredMixin, View):
         )
 
     def post(self, request, *args, **kwargs):
-        user_id = kwargs.get('id')
+        user_id = kwargs.get('pk')
         user = CustomUser.objects.get(id=user_id)
         if user:
             user.delete()
