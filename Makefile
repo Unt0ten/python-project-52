@@ -21,3 +21,6 @@ build:
 
 compile:
 	cd task_manager && poetry run django-admin makemessages -l ru && poetry run django-admin compilemessages --ignore=venv
+
+tests:
+	poetry run python3 manage.py test task_manager.tests

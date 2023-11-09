@@ -9,7 +9,7 @@
   <div class="container wrapper flex-grow-1">
 
 
-    <form action="{% url 'update_user' id=user_id %}" method="post">
+    <form action="{% url 'update_user' pk=user_id %}" method="post">
       {% csrf_token %}
 
       <div class="mb-3"><label class="form-label" for="id_first_name">{% translate 'Fist name' %}</label><input type="text" name="first_name"

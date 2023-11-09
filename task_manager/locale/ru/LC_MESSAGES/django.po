@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-08 22:50+0700\n"
+"POT-Creation-Date: 2023-11-09 19:19+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,8 +28,8 @@ msgstr "Выполнил"
 msgid "Home"
 msgstr "Главная"
 
-#: templates/header.html:10 templates/users/index.html:4
-#: templates/users/index.html:8
+#: templates/header.html:10 templates/users/users.html:4
+#: templates/users/users.html:8
 msgid "Users"
 msgstr "Пользователи"
 
@@ -76,32 +76,16 @@ msgstr "Фамилия"
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: templates/users/create.html:40 templates/users/update.html:39
-msgid ""
-"Obligatory field. No more than 150 characters. Only letters, numbers and "
-"symbols @/./+/-/_."
-msgstr ""
-"Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./"
-"+/-/_."
-
 #: templates/users/create.html:43 templates/users/create.html:46
 #: templates/users/login.html:26 templates/users/update.html:42
 #: templates/users/update.html:45
 msgid "Password"
 msgstr "Пароль"
 
-#: templates/users/create.html:49 templates/users/update.html:48
-msgid "Your password must contain at least 3 characters."
-msgstr "Ваш пароль должен содержать как минимум 3 символа."
-
 #: templates/users/create.html:52 templates/users/create.html:56
 #: templates/users/update.html:51 templates/users/update.html:55
 msgid "Password confirmation"
 msgstr "Подтверждение пароля"
-
-#: templates/users/create.html:62 templates/users/update.html:61
-msgid "To confirm, please enter your password again."
-msgstr "Для подтверждения введите пароль еще раз."
 
 #: templates/users/create.html:64
 msgid "Register"
@@ -115,25 +99,9 @@ msgstr "Удаление пользователя"
 msgid "Are you sure you want to delete the user"
 msgstr "Вы уверены, что хотите удалить пользователя"
 
-#: templates/users/delete.html:12 templates/users/index.html:30
+#: templates/users/delete.html:12 templates/users/users.html:30
 msgid "Delete"
 msgstr "Удалить"
-
-#: templates/users/index.html:13
-msgid "User name"
-msgstr "Имя пользователя"
-
-#: templates/users/index.html:14
-msgid "Full name"
-msgstr "Полное имя"
-
-#: templates/users/index.html:15
-msgid "Date of creation"
-msgstr "Дата создания"
-
-#: templates/users/index.html:28
-msgid "Сhange"
-msgstr "Изменить"
 
 #: templates/users/login.html:4
 msgid "Login"
@@ -151,25 +119,58 @@ msgstr "Изменение пользователя"
 msgid "Change"
 msgstr "Изменить"
 
-#: users/views.py:38
+#: templates/users/users.html:13
+msgid "User name"
+msgstr "Имя пользователя"
+
+#: templates/users/users.html:14
+msgid "Full name"
+msgstr "Полное имя"
+
+#: templates/users/users.html:15
+msgid "Date of creation"
+msgstr "Дата создания"
+
+#: templates/users/users.html:28
+msgid "Сhange"
+msgstr "Изменить"
+
+#: users/mixins.py:16
+msgid "You don't have permition to change other user."
+msgstr "У вас нет разрешения на изменение другого пользователя."
+
+#: users/views.py:35
 msgid "Your profile has been successfully created!"
 msgstr "Ваш профиль успешно создан!"
 
-#: users/views.py:63
+#: users/views.py:62
 msgid "User successfully changed"
 msgstr "Пользователь успешно изменен!"
 
-#: users/views.py:89
+#: users/views.py:91
 msgid "User deleted successfully!"
 msgstr "Пользователь успешно удален!"
 
-#: users/views.py:107
+#: users/views.py:109
 msgid "You are logged in"
 msgstr "Вы авторизованы"
 
-#: users/views.py:114
+#: users/views.py:116
 msgid "You are logged out"
 msgstr "Вы вышли из системы"
+
+#~ msgid ""
+#~ "Obligatory field. No more than 150 characters. Only letters, numbers and "
+#~ "symbols @/./+/-/_."
+#~ msgstr ""
+#~ "Обязательное поле. Не более 150 символов. Только буквы, цифры и символы "
+#~ "@/./+/-/_."
+
+#~ msgid "Your password must contain at least 3 characters."
+#~ msgstr "Ваш пароль должен содержать как минимум 3 символа."
+
+#~ msgid "To confirm, please enter your password again."
+#~ msgstr "Для подтверждения введите пароль еще раз."
 
 #~ msgid "A user with the same name already exists."
 #~ msgstr "Пользователь с таким именем уже существует"
