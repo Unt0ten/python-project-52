@@ -10,11 +10,11 @@ from .models import CustomUser
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 
 
-class IndexView(View):
+class CustomUsersView(View):
 
     def get(self, request, *args, **kwargs):
-        users = CustomUser.objects.all()
-        return render(request, 'users/index.html', context={'users': users})
+        users = CustomUser.objects.filter(is_staff=False)
+        return render(request, 'users/users.html', context={'users': users})
 
 
 class UserFormCreateView(View):
@@ -39,6 +39,9 @@ class UserFormCreateView(View):
 
 
 class UserFormUpdateView(LoginRequiredMixin, View):
+
+    login_url = 'login/'
+    permission_denied_message = "swd"
 
     def get(self, request, *args, **kwargs):
         user_id = kwargs.get('id')
@@ -66,6 +69,9 @@ class UserFormUpdateView(LoginRequiredMixin, View):
 
 
 class UserFormDeleteView(LoginRequiredMixin, View):
+
+    login_url = 'login/'
+
     def get(self, request, *args, **kwargs):
         user_id = kwargs.get('id')
         user = CustomUser.objects.get(id=user_id)
