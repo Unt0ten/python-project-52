@@ -40,8 +40,6 @@ class UserFormCreateView(View):
 
 class UserFormUpdateView(CustomAccessMixin, View):
 
-    login_url = 'login/'
-
     def get(self, request, *args, **kwargs):
         user_id = kwargs.get('pk')
         user = CustomUser.objects.get(id=user_id)
@@ -68,8 +66,6 @@ class UserFormUpdateView(CustomAccessMixin, View):
 
 
 class UserFormDeleteView(CustomAccessMixin, View):
-
-    login_url = 'login/'
 
     def get(self, request, *args, **kwargs):
         user_id = kwargs.get('pk')
