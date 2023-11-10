@@ -1,10 +1,9 @@
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.utils.translation import gettext as _
-from django.contrib.auth.mixins import AccessMixin
 
 
-class CustomAccessMixin(AccessMixin):
+class CustomAccessMixin:
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -15,15 +14,12 @@ class CustomAccessMixin(AccessMixin):
             return redirect('login')
 
         user_id = self.kwargs.get('pk')
+
         if self.request.user.pk != user_id:
-            return self.handle_no_permission()
+            messages.warning(
+                self.request,
+                _("You don't have permition to change other user.")
+            )
+            return redirect('users')
 
         return super().dispatch(request, *args, **kwargs)
-
-    def handle_no_permission(self):
-        messages.warning(
-            self.request,
-            _("You don't have permition to change other user.")
-        )
-
-        return redirect('users')
