@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-09 19:19+0700\n"
+"POT-Creation-Date: 2023-11-10 08:00+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -135,27 +135,31 @@ msgstr "Дата создания"
 msgid "Сhange"
 msgstr "Изменить"
 
-#: users/mixins.py:16
+#: users/mixins.py:13
+msgid "You are not authorized! Please log in."
+msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
+
+#: users/mixins.py:26
 msgid "You don't have permition to change other user."
 msgstr "У вас нет разрешения на изменение другого пользователя."
 
-#: users/views.py:35
+#: users/views.py:34
 msgid "Your profile has been successfully created!"
 msgstr "Ваш профиль успешно создан!"
 
-#: users/views.py:62
+#: users/views.py:61
 msgid "User successfully changed"
 msgstr "Пользователь успешно изменен!"
 
-#: users/views.py:91
+#: users/views.py:90
 msgid "User deleted successfully!"
 msgstr "Пользователь успешно удален!"
 
-#: users/views.py:109
+#: users/views.py:108
 msgid "You are logged in"
 msgstr "Вы авторизованы"
 
-#: users/views.py:116
+#: users/views.py:115
 msgid "You are logged out"
 msgstr "Вы вышли из системы"
 

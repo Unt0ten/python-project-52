@@ -1,6 +1,5 @@
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views import View
@@ -8,7 +7,7 @@ from django.utils.translation import gettext as _
 
 from .models import CustomUser
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .mixins import CustomUserPassesTestMixin
+from .mixins import CustomAccessMixin
 
 
 class CustomUsersView(View):
@@ -39,7 +38,7 @@ class UserFormCreateView(View):
         return render(request, 'users/create.html', {'form': user_form})
 
 
-class UserFormUpdateView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
+class UserFormUpdateView(CustomAccessMixin, View):
 
     login_url = 'login/'
 
@@ -68,7 +67,7 @@ class UserFormUpdateView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
         )
 
 
-class UserFormDeleteView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
+class UserFormDeleteView(CustomAccessMixin, View):
 
     login_url = 'login/'
 

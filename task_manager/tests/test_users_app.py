@@ -28,6 +28,7 @@ class StatusCodeTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_change_url_auth(self):
+        # поправить тесты!
         user_pk = self.user.id
         self.client._login(self.user)
         response = self.client.get(f'/users/{user_pk}/update/')
