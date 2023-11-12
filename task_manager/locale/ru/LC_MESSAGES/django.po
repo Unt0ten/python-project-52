@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-12 14:48+0700\n"
+"POT-Creation-Date: 2023-11-12 16:34+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: statuses/mixins.py:8 users/mixins.py:12
+#: statuses/mixins.py:10 users/mixins.py:12
 msgid "You are not authorized! Please log in."
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
@@ -41,6 +41,22 @@ msgstr "Пользователь успешно изменен!"
 #| msgid "User deleted successfully!"
 msgid "Status deleted successfully!"
 msgstr "Пользователь успешно удален!"
+
+#: templates/errors/404.html:10
+msgid "You won't find anything here("
+msgstr "Здесь вы ничего не найдете("
+
+#: templates/errors/404.html:12
+msgid "Sorry, this page was not found or has been moved"
+msgstr "К сожалению, данная страница не найдена или перемещена"
+
+#: templates/errors/500.html:10
+msgid "An unexpected error occurred on the server"
+msgstr "На сервере произошла непредвиденная ошибка"
+
+#: templates/errors/500.html:12
+msgid "Please return to home page"
+msgstr "Пожалуйста, вернитесь на главную страницу"
 
 #: templates/footer.html:7
 msgid "Made by"
@@ -213,23 +229,23 @@ msgstr "Полное имя"
 msgid "You don't have permition to change other user."
 msgstr "У вас нет прав на изменения другого пользователя."
 
-#: users/views.py:34
+#: users/views.py:35
 msgid "Your profile has been successfully created!"
 msgstr "Ваш профиль успешно создан!"
 
-#: users/views.py:59
+#: users/views.py:60
 msgid "User successfully changed"
 msgstr "Пользователь успешно изменен!"
 
-#: users/views.py:86
+#: users/views.py:87
 msgid "User deleted successfully!"
 msgstr "Пользователь успешно удален!"
 
-#: users/views.py:104
+#: users/views.py:105
 msgid "You are logged in"
 msgstr "Вы авторизованы"
 
-#: users/views.py:111
+#: users/views.py:112
 msgid "You are logged out"
 msgstr "Вы вышли из системы"
 
