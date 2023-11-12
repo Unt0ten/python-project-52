@@ -19,16 +19,20 @@ from django.urls import path, include
 from task_manager import views
 from django.conf.urls.static import static
 from django.conf import settings
-from .users import views as auth
+
+import task_manager.users.views as view
 
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('users/', include('task_manager.users.urls')),
-    path('login/', auth.LoginUser.as_view(), name='login'),
-    path('logout/', auth.LoginUser.logout_user, name='logout'),
+    path('login/', view.LoginUser.as_view(), name='login'),
+    path('logout/', view.LoginUser.logout_user, name='logout'),
+    path('statuses/', include('task_manager.statuses.urls')),
     path('admin/', admin.site.urls),
 ]
 
+handler404 = "task_manager.views.tr_handler403"
+handler500 = "task_manager.views.tr_handler500"
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

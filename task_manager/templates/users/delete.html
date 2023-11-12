@@ -4,12 +4,12 @@
 {% block title %}{% translate 'Deleting a user' %}{% endblock %}
 {% block main %}
 
-    <h1 class="my-4 ">{% translate 'Deleting a user' %}</h1>
-    <p>{% translate 'Are you sure you want to delete the user' %} {{ user.username }}?</p>
+  <h1 class="my-4 ">{% translate 'Deleting a user' %}</h1>
+  <p>{% translate 'Are you sure you want to delete the user' %} {{ user.username }}?</p>
 
-    <form action="{% url 'delete_user' user.id %}" method="post">
-      {% csrf_token %}
-      <input class="btn btn-danger my-2" type="submit" value="{% translate 'Delete' %}">
-    </form>
+  <form action="{% url 'delete_user' user.id %}" method="post">
+    {% csrf_token %}
+    <input class="btn btn-outline-danger my-2" type="submit" value="{% translate 'Delete' %}">
+  </form>
 
 {% endblock %}

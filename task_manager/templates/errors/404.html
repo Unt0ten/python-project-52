@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% load i18n %}
+{% load static %}
+
+
+
+{% block main %}
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <main class="px-3">
+      <h1>{% translate "You won't find anything here(" %}</h1>
+      <p class="lead">
+        {% translate 'Sorry, this page was not found or has been moved' %}
+      </p>
+    </main>
+  </div>
+{% endblock main %}

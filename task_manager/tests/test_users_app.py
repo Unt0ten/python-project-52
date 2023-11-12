@@ -1,17 +1,16 @@
+from django.contrib.auth.models import User
 from django.test import TestCase
 from django.shortcuts import reverse
 from django.core.exceptions import ObjectDoesNotExist
-
-from task_manager.users.models import CustomUser
 
 
 class StatusCodeTestCase(TestCase):
 
     def setUp(self):
-        CustomUser.objects.create(username='lion', password='111')
-        CustomUser.objects.create(username='user', password='123')
-        self.logged_user = CustomUser.objects.get(username='lion')
-        self.anonim_user = CustomUser.objects.get(username='user')
+        User.objects.create(username='lion', password='111')
+        User.objects.create(username='user', password='123')
+        self.logged_user = User.objects.get(username='lion')
+        self.anonim_user = User.objects.get(username='user')
         self.anonim_user_pk = self.anonim_user.id
         self.logged_user_pk = self.logged_user.id
 
@@ -99,14 +98,14 @@ class UsersCUDTestCase(TestCase):
             'last_name': 'Ivanov',
             'username': 'vanishe',
             'password': '111',
-            }
+        }
 
     def test_create_user_success(self):
         url = reverse('create_user')
         user = self.data['valid_user']
         response = self.client.post(url, user)
         self.assertRedirects(response, '/login/')
-        find_user = CustomUser.objects.get(username='@user')
+        find_user = User.objects.get(username='@user')
         self.assertEqual(find_user.username, '@user')
 
     def test_create_user_false_username(self):
@@ -115,7 +114,7 @@ class UsersCUDTestCase(TestCase):
         self.client.post(url, wrong_user_username)
 
         with self.assertRaises(ObjectDoesNotExist):
-            CustomUser.objects.get(username='$user')
+            User.objects.get(username='$user')
 
     def test_create_user_false_password(self):
         url = reverse('create_user')
@@ -123,26 +122,23 @@ class UsersCUDTestCase(TestCase):
         self.client.post(url, wrong_user_password)
 
         with self.assertRaises(ObjectDoesNotExist):
-            CustomUser.objects.get(username='@user')
+            User.objects.get(username='@user')
 
     def test_update_user(self):
-        user = CustomUser.objects.create(**self.user_data)
+        user = User.objects.create(**self.user_data)
         self.client._login(user)
         user_pk = user.id
         url = reverse('update_user', kwargs={'pk': user_pk})
         self.client.post(url, self.data['updated_valid_user'])
-        update_user = CustomUser.objects.get(id=user_pk)
+        update_user = User.objects.get(id=user_pk)
         self.assertEqual(update_user.username, '@master')
 
     def test_delete_user(self):
-        user = CustomUser.objects.create(**self.user_data)
+        user = User.objects.create(**self.user_data)
         self.client._login(user)
         user_pk = user.id
         url = reverse('delete_user', kwargs={'pk': user_pk})
         self.client.post(url)
 
         with self.assertRaises(ObjectDoesNotExist):
-            CustomUser.objects.get(id=user_pk)
-
-
-
+            User.objects.get(id=user_pk)

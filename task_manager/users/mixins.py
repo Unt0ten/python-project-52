@@ -10,7 +10,7 @@ class CustomAccessMixin:
             messages.warning(
                 self.request,
                 _("You are not authorized! Please log in.")
-                )
+            )
             return redirect('login')
 
         user_id = self.kwargs.get('pk')

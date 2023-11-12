@@ -1,11 +1,12 @@
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views import View
 from django.utils.translation import gettext as _
 
-from .models import CustomUser
+
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .mixins import CustomAccessMixin
 
@@ -13,7 +14,7 @@ from .mixins import CustomAccessMixin
 class CustomUsersView(View):
 
     def get(self, request, *args, **kwargs):
-        users = CustomUser.objects.filter(is_staff=False)
+        users = User.objects.filter(is_staff=False)
         return render(request, 'users/users.html', context={'users': users})
 
 
@@ -42,7 +43,7 @@ class UserFormUpdateView(CustomAccessMixin, View):
 
     def get(self, request, *args, **kwargs):
         user_id = kwargs.get('pk')
-        user = CustomUser.objects.get(id=user_id)
+        user = User.objects.get(id=user_id)
         form = CustomUserChangeForm(instance=user)
         return render(
             request,
@@ -52,7 +53,7 @@ class UserFormUpdateView(CustomAccessMixin, View):
 
     def post(self, request, *args, **kwargs):
         user_id = kwargs.get('pk')
-        user = CustomUser.objects.get(id=user_id)
+        user = User.objects.get(id=user_id)
         form = CustomUserChangeForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
@@ -69,7 +70,7 @@ class UserFormDeleteView(CustomAccessMixin, View):
 
     def get(self, request, *args, **kwargs):
         user_id = kwargs.get('pk')
-        user = CustomUser.objects.get(id=user_id)
+        user = User.objects.get(id=user_id)
         return render(
             request,
             'users/delete.html',
@@ -78,7 +79,7 @@ class UserFormDeleteView(CustomAccessMixin, View):
 
     def post(self, request, *args, **kwargs):
         user_id = kwargs.get('pk')
-        user = CustomUser.objects.get(id=user_id)
+        user = User.objects.get(id=user_id)
         if user:
             user.delete()
             messages.success(

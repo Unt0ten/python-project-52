@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-11 10:22+0700\n"
+"POT-Creation-Date: 2023-11-12 14:48+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,37 +20,70 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: templates/footer.html:6
+#: statuses/mixins.py:8 users/mixins.py:12
+msgid "You are not authorized! Please log in."
+msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
+
+#: statuses/views.py:29
+#, fuzzy
+#| msgid "User successfully changed"
+msgid "Status successfully created"
+msgstr "Пользователь успешно изменен!"
+
+#: statuses/views.py:54
+#, fuzzy
+#| msgid "User successfully changed"
+msgid "Status successfully changed"
+msgstr "Пользователь успешно изменен!"
+
+#: statuses/views.py:82
+#, fuzzy
+#| msgid "User deleted successfully!"
+msgid "Status deleted successfully!"
+msgstr "Пользователь успешно удален!"
+
+#: templates/footer.html:7
 msgid "Made by"
 msgstr "Выполнил"
 
-#: templates/header.html:9
+#: templates/header.html:10
 msgid "Home"
 msgstr "Главная"
 
-#: templates/header.html:10 templates/users/users.html:4
+#: templates/header.html:11 templates/users/users.html:4
 #: templates/users/users.html:8
 msgid "Users"
 msgstr "Пользователи"
 
-#: templates/header.html:14 templates/users/login.html:8
+#: templates/header.html:15 templates/users/login.html:8
 msgid "Entrance"
 msgstr "Войти"
 
-#: templates/header.html:15 templates/users/create.html:5
+#: templates/header.html:17 templates/users/create.html:5
 #: templates/users/create.html:10
 msgid "Registration"
 msgstr "Регистрация"
 
-#: templates/header.html:20
+#: templates/header.html:23
+#, fuzzy
+#| msgid "Users"
+msgid "User"
+msgstr "Пользователи"
+
+#: templates/header.html:38 templates/statuses/statuses.html:4
+#: templates/statuses/statuses.html:8
+msgid "Statuses"
+msgstr "Статусы"
+
+#: templates/header.html:39
 msgid "Logout"
 msgstr "Выйти"
 
-#: templates/index.html:8 templates/layout.html:10
+#: templates/index.html:10 templates/layout.html:10
 msgid "Task Manager"
 msgstr "Менеджер задач"
 
-#: templates/index.html:10
+#: templates/index.html:12
 msgid ""
 "A task management system that allows you to set tasks, assign performers and "
 "change their statuses. To work with the system you need registration and "
@@ -60,34 +93,87 @@ msgstr ""
 "исполнителей и менять их статусы. Для работы с системой требуется "
 "регистрация и аутентификация."
 
-#: templates/users/create.html:18 templates/users/create.html:21
-#: templates/users/update.html:15 templates/users/update.html:19
+#: templates/statuses/create.html:4 templates/statuses/create.html:7
+msgid "Create status"
+msgstr "Создать статус"
+
+#: templates/statuses/create.html:11 templates/users/create.html:18
+#: templates/users/create.html:22 templates/users/update.html:12
+#: templates/users/update.html:18
 msgid "Fist name"
 msgstr "Имя"
 
-#: templates/users/create.html:23 templates/users/create.html:26
-#: templates/users/update.html:21 templates/users/update.html:25
+#: templates/statuses/create.html:15 templates/statuses/statuses.html:15
+#: templates/statuses/update.html:11 templates/statuses/update.html:12
+msgid "Name"
+msgstr "Имя"
+
+#: templates/statuses/create.html:17
+msgid "Create"
+msgstr "Создать"
+
+#: templates/statuses/delete.html:4
+#, fuzzy
+#| msgid "Deleting a user"
+msgid "Delete status"
+msgstr "Удаление пользователя"
+
+#: templates/statuses/delete.html:7
+#, fuzzy
+#| msgid "Deleting a user"
+msgid "Deleting a status"
+msgstr "Удаление пользователя"
+
+#: templates/statuses/delete.html:8
+#, fuzzy
+#| msgid "Are you sure you want to delete the user"
+msgid "Are you sure you want to delete the status"
+msgstr "Вы уверены, что хотите удалить пользователя"
+
+#: templates/statuses/delete.html:12 templates/statuses/statuses.html:30
+#: templates/users/delete.html:12 templates/users/users.html:30
+msgid "Delete"
+msgstr "Удалить"
+
+#: templates/statuses/statuses.html:16 templates/users/users.html:15
+msgid "Date of creation"
+msgstr "Дата создания"
+
+#: templates/statuses/statuses.html:28 templates/users/users.html:28
+msgid "Сhange"
+msgstr "Изменить"
+
+#: templates/statuses/update.html:4 templates/statuses/update.html:7
+msgid "Update status"
+msgstr "Изменить статус"
+
+#: templates/statuses/update.html:14
+msgid "Update"
+msgstr "Изменить"
+
+#: templates/users/create.html:24 templates/users/create.html:28
+#: templates/users/update.html:20 templates/users/update.html:25
 msgid "Last name"
 msgstr "Фамилия"
 
-#: templates/users/create.html:28 templates/users/create.html:33
-#: templates/users/login.html:21 templates/users/update.html:27
-#: templates/users/update.html:33
+#: templates/users/create.html:30 templates/users/create.html:35
+#: templates/users/login.html:18 templates/users/update.html:29
+#: templates/users/update.html:35
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: templates/users/create.html:43 templates/users/create.html:46
-#: templates/users/login.html:26 templates/users/update.html:42
-#: templates/users/update.html:45
+#: templates/users/create.html:45 templates/users/create.html:49
+#: templates/users/login.html:26 templates/users/update.html:44
+#: templates/users/update.html:48
 msgid "Password"
 msgstr "Пароль"
 
-#: templates/users/create.html:52 templates/users/create.html:56
-#: templates/users/update.html:51 templates/users/update.html:55
+#: templates/users/create.html:56 templates/users/create.html:60
+#: templates/users/update.html:55 templates/users/update.html:60
 msgid "Password confirmation"
 msgstr "Подтверждение пароля"
 
-#: templates/users/create.html:64
+#: templates/users/create.html:68
 msgid "Register"
 msgstr "Регистрация"
 
@@ -99,15 +185,11 @@ msgstr "Удаление пользователя"
 msgid "Are you sure you want to delete the user"
 msgstr "Вы уверены, что хотите удалить пользователя"
 
-#: templates/users/delete.html:12 templates/users/users.html:30
-msgid "Delete"
-msgstr "Удалить"
-
 #: templates/users/login.html:4
 msgid "Login"
 msgstr "Авторизация"
 
-#: templates/users/login.html:32
+#: templates/users/login.html:33
 msgid "To come in"
 msgstr "Войти"
 
@@ -115,7 +197,7 @@ msgstr "Войти"
 msgid "Change user"
 msgstr "Изменение пользователя"
 
-#: templates/users/update.html:63
+#: templates/users/update.html:68
 msgid "Change"
 msgstr "Изменить"
 
@@ -126,18 +208,6 @@ msgstr "Имя пользователя"
 #: templates/users/users.html:14
 msgid "Full name"
 msgstr "Полное имя"
-
-#: templates/users/users.html:15
-msgid "Date of creation"
-msgstr "Дата создания"
-
-#: templates/users/users.html:28
-msgid "Сhange"
-msgstr "Изменить"
-
-#: users/mixins.py:12
-msgid "You are not authorized! Please log in."
-msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
 #: users/mixins.py:21
 msgid "You don't have permition to change other user."

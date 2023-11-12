@@ -3,23 +3,42 @@
 
 {% block header %}
 
-<header class="mb-auto">
-  <div>
-    <nav class="nav nav-masthead justify-content-center float-lg-start">
-      <a class="nav-link fw-bold py-2 px-md-4 text-light" aria-current="page" href="{% url 'index' %}">{% translate 'Home' %}</a>
-      <a class="nav-link fw-bold py-2 px-md-4 text-white-50" href="{% url 'users' %}">{% translate 'Users' %}</a>
-    </nav>
-    {% if not request.user.is_authenticated %}
-    <nav class="nav nav-masthead justify-content-center float-md-end">
-      <a class="nav-link fw-bold py-2 px-md-3 text-white-50" href="{% url 'login' %}">{% translate 'Entrance' %}</a>
-      <a class="nav-link fw-bold py-2 px-md-3 text-white-50" href="{% url 'create_user' %}">{% translate 'Registration' %}</a>
-    </nav>
-    {% endif %}
-    {% if request.user.is_authenticated %}
-    <nav class="nav nav-masthead justify-content-center float-md-end">
-      <a class="nav-link fw-bold py-2 px-md-3 text-white-50" href="{% url 'logout' %}">{% translate 'Logout' %}</a>
-    </nav>
-    {% endif %}
-  </div>
-</header>
-{% endblock header %}
+  <header class="flex-shrink-0 border-bottom">
+    <div class="navbar px-3">
+      <nav class="navbar nav-masthead justify-content-center float-lg-start">
+        <a class="nav-link py-2 px-md-4"
+           href="{% url 'index' %}">{% translate 'Home' %}</a>
+        <a class="nav-link py-2 px-md-4" aria-current="page" href="{% url 'users' %}">{% translate 'Users' %}</a>
+      </nav>
+      {% if not request.user.is_authenticated %}
+        <nav class="navbar nav-masthead justify-content-center float-md-end">
+          <a class="nav-link py-2 px-md-3 text-white-50" href="{% url 'login' %}">{% translate 'Entrance' %}</a>
+          <a class="nav-link py-2 px-md-3 text-white-50"
+             href="{% url 'create_user' %}">{% translate 'Registration' %}</a>
+        </nav>
+      {% endif %}
+      {% if request.user.is_authenticated %}
+        <div class="collapse" id="navbarToggleExternalContent">
+          <div>
+            <h5 class="text-white h-25">{% translate 'User' %}</h5>
+            <span class="text-muted">{{ user.username }}</span>
+          </div>
+        </div>
+        <nav class="navbar navbar-dark">
+          <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+        </nav>
+        <nav class="navbar nav-masthead justify-content-center float-md-end">
+          <a class="nav-link py-2 px-md-3 text-white-50"
+             href="{% url 'statuses' %}">{% translate 'Statuses' %}</a>
+          <a class="nav-link py-2 px-md-3 text-white-50" href="{% url 'logout' %}">{% translate 'Logout' %}</a>
+        </nav>
+      {% endif %}
+    </div>
+  </header>
+{% endblock %}

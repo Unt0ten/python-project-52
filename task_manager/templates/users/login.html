@@ -4,32 +4,33 @@
 {% block title %}{% translate 'Login' %}{% endblock %}
 {% block main %}
 
-<div class="container wrapper">
-  <h1 class="my-4 float-lg-start">{% translate 'Entrance' %}</h1>
-</div>
 
-<div class="container wrapper flex-grow-1">
+  <h1>{% translate 'Entrance' %}</h1>
 
-    {% if form.errors %}
-      {% for key,value in form.errors.items %}
-        <div class="text-danger">{{ value|escape }}</div>
-      {% endfor %}
-    {% endif %}
+  {% if form.errors %}
+    {% for key,value in form.errors.items %}
+      <div class="text-danger">{{ value|escape }}</div>
+    {% endfor %}
+  {% endif %}
 
   <form action="{% url 'login' %}" method="post">
     {% csrf_token %}
-    <div class="mb-3"><label class="form-label" for="id_username">{% translate 'Username' %}</label><input type="text" name="username"
-                                                                                      maxlength="150"
-                                                                                      class="form-control"
-                                                                                      placeholder="Имя пользователя" required
-                                                                                      id="id_username"></div>
-    <div class="mb-3"><label class="form-label" for="id_password">{% translate 'Password' %}</label><input type="password" name="password"
-                                                                                        autocomplete="new-password"
-                                                                                        class="form-control"
-                                                                                        placeholder="Пароль" required
-                                                                                        id="id_password">
+    <div class="mb-3"><label class="form-label" for="id_username">{% translate 'Username' %}</label><input type="text"
+                                                                                                           name="username"
+                                                                                                           maxlength="150"
+                                                                                                           class="form-control"
+                                                                                                           placeholder="Имя пользователя"
+                                                                                                           required
+                                                                                                           id="id_username">
     </div>
-    <input class="btn btn-info my-2" type="submit" value="{% translate 'To come in' %}">
+    <div class="mb-3"><label class="form-label" for="id_password">{% translate 'Password' %}</label><input
+        type="password" name="password"
+        autocomplete="new-password"
+        class="form-control"
+        placeholder="Пароль" required
+        id="id_password">
+    </div>
+    <input class="btn btn-outline-success my-2" type="submit" value="{% translate 'To come in' %}">
   </form>
-</div>
+
 {% endblock main %}

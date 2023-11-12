@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% translate 'Update status' %}{% endblock %}
+
+{% block main %}
+  <h1>{% translate 'Update status' %}</h1>
+  <form action="{% url 'update_status' pk=status_pk %}" method="post">
+    {% csrf_token %}
+
+    <div class="mb-3"><label class="form-label" for="id_name">{% translate 'Name' %}</label>
+      <input type="text" name="name" maxlength="150" value="{{ status.name }}" class="form-control" placeholder="{% translate 'Name' %}" required id="id_name">
+    </div>
+    <input class="btn btn-outline-secondary my-2" type="submit" value="{% translate 'Update' %}">
+  </form>
+{% endblock %}

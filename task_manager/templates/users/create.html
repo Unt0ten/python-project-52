@@ -6,63 +6,67 @@
 
 {% block main %}
 
-<div class="container wrapper">
-  <h1 class="my-4 float-lg-start">{% translate 'Registration' %}</h1>
-</div>
-<div class="container wrapper flex-grow-1">
+
+  <h1>{% translate 'Registration' %}</h1>
+
+  <div class="container wrapper flex-grow-1">
 
 
-  <form action="{% url 'create_user' %}" method="post">
-    {% csrf_token %}
+    <form action="{% url 'create_user' %}" method="post">
+      {% csrf_token %}
 
-    <div class="mb-3"><label class="form-label" for="id_first_name">{% translate 'Fist name' %}</label><input type="text" name="first_name"
-                                                                                      maxlength="150"
-                                                                                      class="form-control"
-                                                                                      placeholder="{% translate 'Fist name' %}" required
-                                                                                      id="id_first_name"></div>
-    <div class="mb-3"><label class="form-label" for="id_last_name">{% translate 'Last name' %}</label><input type="text" name="last_name"
-                                                                                         maxlength="150"
-                                                                                         class="form-control"
-                                                                                         placeholder="{% translate 'Last name' %}" required
-                                                                                         id="id_last_name"></div>
-    <div class="mb-3"><label class="form-label" for="id_username">{% translate 'Username' %}</label><input type="text"
-                                                                                                 name="username"
-                                                                                                 maxlength="150"
-                                                                                                 autofocus
-                                                                                                 class="form-control"
-                                                                                                 placeholder="{% translate 'Username' %}"
-                                                                                                 required
-                                                                                                 id="id_username">
+      <div class="mb-3"><label class="form-label" for="id_first_name">{% translate 'Fist name' %}</label><input
+          type="text" name="first_name"
+          maxlength="150"
+          class="form-control"
+          placeholder="{% translate 'Fist name' %}" required
+          id="id_first_name"></div>
+      <div class="mb-3"><label class="form-label" for="id_last_name">{% translate 'Last name' %}</label><input
+          type="text" name="last_name"
+          maxlength="150"
+          class="form-control"
+          placeholder="{% translate 'Last name' %}" required
+          id="id_last_name"></div>
+      <div class="mb-3"><label class="form-label" for="id_username">{% translate 'Username' %}</label><input type="text"
+                                                                                                             name="username"
+                                                                                                             maxlength="150"
+                                                                                                             autofocus
+                                                                                                             class="form-control"
+                                                                                                             placeholder="{% translate 'Username' %}"
+                                                                                                             required
+                                                                                                             id="id_username">
 
-      {% if form.errors %}
-        <div class="text-danger">{{ form.username.errors }}</div>
-      {% endif %}
-      <div class="form-text">{{ form.username.help_text }}</div>
-    </div>
-
-    <div class="mb-3"><label class="form-label" for="id_password1">{% translate 'Password' %}</label><input type="password" name="password1"
-                                                                                        autocomplete="new-password"
-                                                                                        class="form-control"
-                                                                                        placeholder="{% translate 'Password' %}" required
-                                                                                        id="id_password1">
-      <div class="form-text">
-        {{ form.password1.help_text }}
+        {% if form.errors %}
+          <div class="text-danger">{{ form.username.errors }}</div>
+        {% endif %}
+        <div class="form-text">{{ form.username.help_text }}</div>
       </div>
-    </div>
-    <div class="mb-3"><label class="form-label" for="id_password2">{% translate 'Password confirmation' %}</label><input type="password"
-                                                                                                      name="password2"
-                                                                                                      autocomplete="new-password"
-                                                                                                      class="form-control"
-                                                                                                      placeholder="{% translate 'Password confirmation' %}"
-                                                                                                      required
-                                                                                                      id="id_password2">
-      {% if form.errors %}
-        <div class="text-danger">{{ form.password2.errors }}</div>
-      {% endif %}
-      <div class="form-text">{{ form.password2.help_text }}</div>
-    </div>
-    <input class="btn btn-info my-2" type="submit" value="{% translate 'Register' %}">
-  </form>
-</div>
+
+      <div class="mb-3"><label class="form-label" for="id_password1">{% translate 'Password' %}</label><input
+          type="password" name="password1"
+          autocomplete="new-password"
+          class="form-control"
+          placeholder="{% translate 'Password' %}" required
+          id="id_password1">
+        <div class="form-text">
+          {{ form.password1.help_text }}
+        </div>
+      </div>
+      <div class="mb-3"><label class="form-label"
+                               for="id_password2">{% translate 'Password confirmation' %}</label><input type="password"
+                                                                                                        name="password2"
+                                                                                                        autocomplete="new-password"
+                                                                                                        class="form-control"
+                                                                                                        placeholder="{% translate 'Password confirmation' %}"
+                                                                                                        required
+                                                                                                        id="id_password2">
+        {% if form.errors %}
+          <div class="text-danger">{{ form.password2.errors }}</div>
+        {% endif %}
+        <div class="form-text">{{ form.password2.help_text }}</div>
+      </div>
+      <input class="btn btn-outline-secondary my-2" type="submit" value="{% translate 'Register' %}">
+    </form>
+  </div>
 
 {% endblock main %}
