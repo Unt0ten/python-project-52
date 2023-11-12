@@ -14,6 +14,9 @@
         class="form-control"
         placeholder="{% translate 'Name' %}" required
         id="id_name"></div>
+    {% if form.errors %}
+          <div class="text-danger">{{ form.name.errors }}</div>
+    {% endif %}
   <input class="btn btn-outline-secondary my-2" type="submit" value="{% translate 'Create' %}">
   </form>
 {% endblock %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-12 16:34+0700\n"
+"POT-Creation-Date: 2023-11-12 17:30+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,23 +24,21 @@ msgstr ""
 msgid "You are not authorized! Please log in."
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
+#: statuses/models.py:8
+msgid "Task status with such Name already exist."
+msgstr "Статус задачи с таким именем уже существует"
+
 #: statuses/views.py:29
-#, fuzzy
-#| msgid "User successfully changed"
 msgid "Status successfully created"
-msgstr "Пользователь успешно изменен!"
+msgstr "Статус успешно создан!"
 
 #: statuses/views.py:54
-#, fuzzy
-#| msgid "User successfully changed"
 msgid "Status successfully changed"
-msgstr "Пользователь успешно изменен!"
+msgstr "Статус успешно изменен!"
 
 #: statuses/views.py:82
-#, fuzzy
-#| msgid "User deleted successfully!"
 msgid "Status deleted successfully!"
-msgstr "Пользователь успешно удален!"
+msgstr "Статус успешно удален!"
 
 #: templates/errors/404.html:10
 msgid "You won't find anything here("
@@ -120,31 +118,27 @@ msgid "Fist name"
 msgstr "Имя"
 
 #: templates/statuses/create.html:15 templates/statuses/statuses.html:15
-#: templates/statuses/update.html:11 templates/statuses/update.html:12
+#: templates/statuses/update.html:11 templates/statuses/update.html:13
 msgid "Name"
 msgstr "Имя"
 
-#: templates/statuses/create.html:17
+#: templates/statuses/create.html:20
 msgid "Create"
 msgstr "Создать"
 
 #: templates/statuses/delete.html:4
 #, fuzzy
-#| msgid "Deleting a user"
+#| msgid "Deleting a status"
 msgid "Delete status"
-msgstr "Удаление пользователя"
+msgstr "Удалить статус"
 
 #: templates/statuses/delete.html:7
-#, fuzzy
-#| msgid "Deleting a user"
 msgid "Deleting a status"
-msgstr "Удаление пользователя"
+msgstr "Удалить статус"
 
 #: templates/statuses/delete.html:8
-#, fuzzy
-#| msgid "Are you sure you want to delete the user"
 msgid "Are you sure you want to delete the status"
-msgstr "Вы уверены, что хотите удалить пользователя"
+msgstr "Вы уверены, что хотите удалить статус"
 
 #: templates/statuses/delete.html:12 templates/statuses/statuses.html:30
 #: templates/users/delete.html:12 templates/users/users.html:30
@@ -163,7 +157,7 @@ msgstr "Изменить"
 msgid "Update status"
 msgstr "Изменить статус"
 
-#: templates/statuses/update.html:14
+#: templates/statuses/update.html:16 templates/statuses/update.html:18
 msgid "Update"
 msgstr "Изменить"
 
@@ -261,9 +255,6 @@ msgstr "Вы вышли из системы"
 
 #~ msgid "To confirm, please enter your password again."
 #~ msgstr "Для подтверждения введите пароль еще раз."
-
-#~ msgid "A user with the same name already exists."
-#~ msgstr "Пользователь с таким именем уже существует"
 
 #~ msgid "Сheck the correctness of data entry."
 #~ msgstr "Проверьте корректность введенных данных."

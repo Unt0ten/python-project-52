@@ -1,7 +1,10 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import gettext as _
 
 
 class StatusModel(models.Model):
-    name = models.CharField(max_length=150)
+    name = models.CharField(max_length=255, unique=True, error_messages={
+            "unique": _("Task status with such Name already exist."),
+        })
     date_creation = models.DateTimeField(default=timezone.now)
