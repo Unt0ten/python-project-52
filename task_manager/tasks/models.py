@@ -22,7 +22,3 @@ class TaskModel(models.Model):
         on_delete=models.PROTECT,
     )
     created_at = models.DateTimeField(default=timezone.now)
-
-    def set_author(self, author):
-        self.author = author
-        self._author = author
