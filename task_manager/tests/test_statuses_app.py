@@ -21,7 +21,7 @@ class StatusCodeTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_statuses_url_anonim(self):
-        response = self.client.get(f'/statuses/')
+        response = self.client.get('/statuses/')
         self.assertRedirects(response, '/login/')
 
     def test_create_url(self):

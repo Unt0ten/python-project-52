@@ -80,5 +80,5 @@ class DeleteStatus(View):
             messages.success(
                 request,
                 _('Status deleted successfully!')
-                )
+            )
         return redirect('statuses')

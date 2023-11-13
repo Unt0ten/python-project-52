@@ -6,7 +6,7 @@
 {% block main %}
 
   <h1 class="my-4">{% translate 'Statuses' %}</h1>
-  <a class="btn btn-outline-secondary mb-3" href="{% url 'create_status' %}">Создать статус</a>
+  <a class="btn btn-outline-secondary mb-3" href="{% url 'create_status' %}">{% translate 'Create status' %}</a>
   <main>
     <table class="table table-striped table-active table-hover">
       <thead>

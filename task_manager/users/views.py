@@ -2,6 +2,7 @@ from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.db.models import ProtectedError
 from django.shortcuts import render, redirect
 from django.views import View
 from django.utils.translation import gettext as _
@@ -11,7 +12,7 @@ from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .mixins import CustomAccessMixin
 
 
-class CustomUsersView(View):
+class UsersView(View):
 
     def get(self, request, *args, **kwargs):
         users = User.objects.filter(is_staff=False)
@@ -81,11 +82,17 @@ class UserFormDeleteView(CustomAccessMixin, View):
         user_id = kwargs.get('pk')
         user = User.objects.get(id=user_id)
         if user:
-            user.delete()
-            messages.success(
-                request,
-                _('User deleted successfully!'))
-        return redirect('users')
+            try:
+                user.delete()
+                messages.success(
+                    request,
+                    _('User deleted successfully!'))
+            except ProtectedError:
+                messages.warning(
+                    request,
+                    _('Cannot delete user because it is in use')
+                    )
+            return redirect('users')
 
 
 class LoginUser(View):
