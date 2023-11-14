@@ -15,10 +15,18 @@ class TaskModel(models.Model):
         }
     )
     description = models.TextField(max_length=1000)
-    status = models.CharField(max_length=255)
-    author = models.CharField(max_length=255, null=True,  editable=False)
+    status = models.ForeignKey(
+        StatusModel,
+        on_delete=models.PROTECT,
+    )
+    author = models.ForeignKey(
+        User,
+        on_delete=models.PROTECT,
+        related_name='author',
+    )
     executor = models.ForeignKey(
         User,
         on_delete=models.PROTECT,
+        related_name='executor'
     )
     created_at = models.DateTimeField(default=timezone.now)

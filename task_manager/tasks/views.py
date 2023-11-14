@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views import View
 from django.utils.translation import gettext as _
@@ -32,7 +33,20 @@ class TasksView(CustomLoginRequiredMixin, View):
         )
 
 
-class CreateTaskView(CustomLoginRequiredMixin, CreateView):
+class CreateTaskView(LoginRequiredMixin, CreateView):
+
+    def form_valid(self, form):
+        """If the form is valid, save the associated model."""
+        form.instance.author = self.request.user
+        self.object = form.save()
+        return super().form_valid(form)
+
+    # def get_form_kwargs(self):
+    #     kwargs = super().get_form_kwargs()
+    #     kwargs.update({
+    #         'author': self.request.user if self.request.user.is_authenticated else None,
+    #     })
+    #     return kwargs
 
     def get(self, request, *args, **kwargs):
         users = User.objects.all()
@@ -51,22 +65,15 @@ class CreateTaskView(CustomLoginRequiredMixin, CreateView):
         )
 
     def post(self, request, *args, **kwargs):
-        task_form = TaskModelForm(request.POST)
-
-        if task_form.is_valid():
-            print('No')
-            task_form.save()
+        form = TaskModelForm(request.POST)
+        if form.is_valid():
+            form.save()
             messages.success(
                 request, _('Your task has been successfully created!')
                 )
             return redirect('tasks')
 
-        return render(request, 'tasks/create.html', {'form': task_form})
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs.update({'author': self.request.user.username})
-        return kwargs
+        return render(request, 'tasks/create.html', {'form': form})
 
 
 class UpdateTaskView(View):

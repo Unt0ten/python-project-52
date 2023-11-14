@@ -11,6 +11,7 @@ class CustomUserAdmin(admin.ModelAdmin):
         'description',
         'status',
         'executor',
+        'created_at'
     )
     search_fields = [
         'name',
@@ -18,5 +19,6 @@ class CustomUserAdmin(admin.ModelAdmin):
         'status',
         'executor',
         'author',
+        'created_at',
     ]
-    list_filter = (('date_creation', DateFieldListFilter),)
+    list_filter = (('created_at', DateFieldListFilter),)
