@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-13 17:13+0700\n"
+"POT-Creation-Date: 2023-11-14 16:13+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,11 +20,12 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: statuses/mixins.py:10 users/mixins.py:12
+#: statuses/mixins.py:10 tasks/mixins.py:10 tasks/mixins.py:26
+#: users/mixins.py:12
 msgid "You are not authorized! Please log in."
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
-#: statuses/models.py:8
+#: statuses/models.py:11
 msgid "Task status with such Name already exist."
 msgstr "Статус задачи с таким именем уже существует"
 
@@ -40,9 +41,21 @@ msgstr "Статус успешно изменен!"
 msgid "Status deleted successfully!"
 msgstr "Статус успешно удален!"
 
-#: tasks/models.py:8
+#: tasks/mixins.py:35
+#, fuzzy
+#| msgid "You don't have permition to change other user."
+msgid "You don't have permition to delte other task."
+msgstr "У вас нет прав на изменения другого пользователя."
+
+#: tasks/models.py:14
 msgid "Task with such Name already exist."
 msgstr "Задача с таким именем уже существует"
+
+#: tasks/views.py:72
+#, fuzzy
+#| msgid "Your profile has been successfully created!"
+msgid "Your task has been successfully created!"
+msgstr "Ваш профиль успешно создан!"
 
 #: templates/errors/404.html:10
 msgid "You won't find anything here("
@@ -129,11 +142,12 @@ msgstr "Имя"
 
 #: templates/statuses/create.html:15 templates/statuses/statuses.html:15
 #: templates/statuses/update.html:11 templates/statuses/update.html:13
+#: templates/tasks/create.html:12 templates/tasks/create.html:16
 #: templates/tasks/tasks.html:51
 msgid "Name"
 msgstr "Имя"
 
-#: templates/statuses/create.html:20
+#: templates/statuses/create.html:20 templates/tasks/create.html:54
 msgid "Create"
 msgstr "Создать"
 
@@ -180,21 +194,29 @@ msgstr "Изменить"
 msgid "Create task"
 msgstr "Создать задачу"
 
-#: templates/tasks/delete.html:4 templates/tasks/delete.html:8
-msgid "Delete task"
-msgstr "Удалить задачу"
+#: templates/tasks/create.html:21 templates/tasks/create.html:25
+#, fuzzy
+#| msgid "Registration"
+msgid "Description"
+msgstr "Регистрация"
 
-#: templates/tasks/tasks.html:13 templates/tasks/tasks.html:52
+#: templates/tasks/create.html:28 templates/tasks/tasks.html:13
+#: templates/tasks/tasks.html:52
 msgid "Status"
 msgstr "Статусы"
 
-#: templates/tasks/tasks.html:21 templates/tasks/tasks.html:54
+#: templates/tasks/create.html:37 templates/tasks/tasks.html:21
+#: templates/tasks/tasks.html:54
 msgid "Executor"
 msgstr "Исполнитель"
 
-#: templates/tasks/tasks.html:30
-msgid "Label"
-msgstr "Метка"
+#: templates/tasks/create.html:46 templates/tasks/tasks.html:30
+msgid "Tags"
+msgstr ""
+
+#: templates/tasks/delete.html:4 templates/tasks/delete.html:8
+msgid "Delete task"
+msgstr "Удалить задачу"
 
 #: templates/tasks/tasks.html:40
 msgid "Only your tasks"
@@ -274,25 +296,32 @@ msgstr "Полное имя"
 msgid "You don't have permition to change other user."
 msgstr "У вас нет прав на изменения другого пользователя."
 
-#: users/views.py:35
+#: users/views.py:36
 msgid "Your profile has been successfully created!"
 msgstr "Ваш профиль успешно создан!"
 
-#: users/views.py:60
+#: users/views.py:61
 msgid "User successfully changed"
 msgstr "Пользователь успешно изменен!"
 
-#: users/views.py:87
+#: users/views.py:89
 msgid "User deleted successfully!"
 msgstr "Пользователь успешно удален!"
 
-#: users/views.py:105
+#: users/views.py:93
+msgid "Cannot delete user because it is in use"
+msgstr ""
+
+#: users/views.py:112
 msgid "You are logged in"
 msgstr "Вы авторизованы"
 
-#: users/views.py:112
+#: users/views.py:119
 msgid "You are logged out"
 msgstr "Вы вышли из системы"
+
+#~ msgid "Label"
+#~ msgstr "Метка"
 
 #~ msgid ""
 #~ "Obligatory field. No more than 150 characters. Only letters, numbers and "
