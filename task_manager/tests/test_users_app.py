@@ -30,38 +30,22 @@ class StatusCodeTestCase(TestCase):
         response = self.client.get('/users/create/')
         self.assertEqual(response.status_code, 200)
 
-    def test_change_url_auth(self):
-        self.client._login(self.logged_user)
-        response = self.client.get(f'/users/{self.logged_user_pk}/update/')
-        self.assertEqual(response.status_code, 200)
-
     def test_change_url_anonim(self):
         response = self.client.get(f'/users/{self.logged_user_pk}/update/')
         self.assertRedirects(response, '/login/')
-
-    def test_delete_url_auth(self):
-        self.client._login(self.logged_user)
-        response = self.client.get(f'/users/{self.logged_user_pk}/delete/')
-        self.assertEqual(response.status_code, 200)
 
     def test_delete_url_anonim(self):
         response = self.client.get(f'/users/{self.anonim_user_pk}/delete/')
         self.assertRedirects(response, '/login/')
 
-    def test_permissions_url_change(self):
-        self.client._login(self.logged_user)
-        response = self.client.get(f'/users/{self.anonim_user_pk}/update/')
-        self.assertRedirects(response, '/users/')
-
-    def test_permissions_url_delete(self):
-        self.client._login(self.logged_user)
-        response = self.client.get(f'/users/{self.anonim_user_pk}/delete/')
-        self.assertRedirects(response, '/users/')
-
 
 class UsersCUDTestCase(TestCase):
 
     def setUp(self):
+        self.changeable_user = User.objects.create(
+            username='Loki',
+            password='111'
+        )
         self.data = {
             'valid_user': {
                 'username': '@user',
@@ -133,6 +117,13 @@ class UsersCUDTestCase(TestCase):
         update_user = User.objects.get(id=user_pk)
         self.assertEqual(update_user.username, '@master')
 
+    def test_update_user_without_access(self):
+        logged_user = User.objects.create(**self.user_data)
+        self.client._login(logged_user)
+        changeable_user_pk = self.changeable_user.id
+        response = self.client.get(f'/users/{changeable_user_pk}/update/')
+        self.assertRedirects(response, '/users/')
+
     def test_delete_user(self):
         user = User.objects.create(**self.user_data)
         self.client._login(user)
@@ -142,3 +133,10 @@ class UsersCUDTestCase(TestCase):
 
         with self.assertRaises(ObjectDoesNotExist):
             User.objects.get(id=user_pk)
+
+    def test_delete_user_without_access(self):
+        logged_user = User.objects.create(**self.user_data)
+        self.client._login(logged_user)
+        deleted_user_pk = self.changeable_user.id
+        response = self.client.get(f'/users/{deleted_user_pk}/delete/')
+        self.assertRedirects(response, '/users/')
