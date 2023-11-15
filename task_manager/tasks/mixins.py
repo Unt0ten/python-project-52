@@ -1,7 +1,9 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, AccessMixin
 from django.shortcuts import redirect
 from django.utils.translation import gettext as _
+
+from .models import TaskModel
 
 
 class CustomLoginRequiredMixin(LoginRequiredMixin):
@@ -17,23 +19,24 @@ class CustomLoginRequiredMixin(LoginRequiredMixin):
         return super().dispatch(request, *args, **kwargs)
 
 
-class CustomAccessMixin:
+class CustomAccessMixin(AccessMixin):
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             messages.warning(
-                self.request,
+                request,
                 _("You are not authorized! Please log in.")
             )
             return redirect('login')
 
-        author_id = self.kwargs.get('pk')
-
-        if self.request.user.pk != author_id:
+        task_id = kwargs.get('pk')
+        task = TaskModel.objects.get(id=task_id)
+        task_author_id = task.author.id
+        if request.user.pk != task_author_id:
             messages.warning(
-                self.request,
-                _("You don't have permition to delte other task.")
+                request,
+                _("Only its author can delete a task")
             )
-            return redirect('users')
+            return redirect('tasks')
 
         return super().dispatch(request, *args, **kwargs)

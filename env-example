@@ -1,0 +1,6 @@
+# Сreate a ".env" file and specify the following variables in it
+
+SECRET_KEY = some_key
+DEBUG = true/false
+LOCAL_HOST = 127.0.0.1
+DATABASE_URL = sqlite:///db.sqlite3 or other

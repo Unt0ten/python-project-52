@@ -11,6 +11,7 @@ class CustomUserAdmin(admin.ModelAdmin):
         'description',
         'status',
         'executor',
+        'author',
         'created_at'
     )
     search_fields = [

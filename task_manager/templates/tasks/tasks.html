@@ -60,15 +60,15 @@
       <tbody>
       <tr>
         <td class="fw-bold text-light">{{ task.id }}</td>
-        <td class="fw-bold text-light"><a href="{% url 'view_task' %}">{{ task.name }}</a></td>
+        <td class="fw-bold text-light"><a href="{% url 'view_task' task.id %}">{{ task.name }}</a></td>
         <td class="fw-bold text-light">{{ task.status.name }}</td>
-        <td class="fw-bold text-light">{{ task.author }}</td>
-        <td class="fw-bold text-light">{{ task.executor }}</td>
+        <td class="fw-bold text-light">{{ task.author.get_full_name }}</td>
+          <td class="fw-bold text-light">{% if task.executor %}{{ task.executor.get_full_name }}{% endif %}</td>
         <td class="fw-bold text-light">{{ task.created_at }}</td>
         <td class="fw-bold text-light">
-          <a class="" href="{% url 'update_task' %}">{% translate 'Сhange' %}</a>
+          <a class="" href="{% url 'update_task' task.id %}">{% translate 'Update' %}</a>
           <br>
-          <a class="" href="{% url 'delete_task' %}">{% translate 'Delete' %}</a>
+          <a class="" href="{% url 'delete_task' task.id %}">{% translate 'Delete' %}</a>
         </td>
       </tr>
       </tbody>

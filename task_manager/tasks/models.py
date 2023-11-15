@@ -27,6 +27,12 @@ class TaskModel(models.Model):
     executor = models.ForeignKey(
         User,
         on_delete=models.PROTECT,
-        related_name='executor'
+        related_name='executor',
+        null=True,
+        blank=True,
     )
     created_at = models.DateTimeField(default=timezone.now)
+
+    def get_absolute_url(self):
+        url = 'tasks'
+        return url

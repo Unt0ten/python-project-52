@@ -5,5 +5,11 @@
 
 {% block main %}
 
-  <h1 class="my-4 float-lg-start">{% translate 'Delete task' %}</h1>
+  <h1 class="my-4">{% translate 'Delete task' %}</h1>
+  <p>{% translate 'Are you sure you want to delete the task' %} {{ task.name }}?</p>
+
+  <form action="{% url 'delete_task' task.id %}" method="post">
+    {% csrf_token %}
+    <input class="btn btn-outline-danger my-2" type="submit" value="{% translate 'Delete' %}">
+  </form>
 {% endblock main %}

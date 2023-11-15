@@ -91,7 +91,7 @@ class UserFormDeleteView(CustomAccessMixin, View):
                 messages.warning(
                     request,
                     _('Cannot delete user because it is in use')
-                    )
+                )
             return redirect('users')
 
 

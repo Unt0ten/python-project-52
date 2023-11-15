@@ -21,7 +21,7 @@
         <div class="collapse" id="navbarToggleExternalContent">
           <div>
             <h5 class="text-white h-25">{% translate 'User' %}</h5>
-            <span class="text-muted">{{ user.username }}</span>
+            <span class="text-muted">{{ user.get_full_name }} ({{ user.username }})</span>
           </div>
         </div>
         <nav class="navbar navbar-dark">
