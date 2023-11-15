@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.views import View
 from django.utils.translation import gettext as _
@@ -22,14 +23,31 @@ class SpecificTaskView(View):
 
 class TasksView(CustomLoginRequiredMixin, View):
 
+    def get_queryset(self):
+        if not self.request.GET:
+            return TaskModel.objects.all()
+        filters = Q()
+        for key in ['status', 'executor', 'author']:
+            value = self.request.GET.get(key)
+            if value:
+                if value == 'on':
+                    value = self.request.user.id
+                filters &= Q(**{f'{key}': value})
+
+        return TaskModel.objects.filter(filters)
+
     def get(self, request, *args, **kwargs):
         users = User.objects.all()
         statuses = StatusModel.objects.all()
-        tasks = TaskModel.objects.all()
+        tasks = self.get_queryset()
         return render(
             request,
             'tasks/tasks.html',
-            {'tasks': tasks, 'users': users, 'statuses': statuses},
+            {
+                'tasks': tasks,
+                'users': users,
+                'statuses': statuses,
+            },
         )
 
 
