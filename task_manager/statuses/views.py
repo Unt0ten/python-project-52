@@ -15,7 +15,7 @@ class StatusesView(CustomLoginRequiredMixin, View):
         return render(request, 'statuses/statuses.html', {'statuses': statuses})
 
 
-class CreateStatus(View):
+class CreateStatus(CustomLoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
         return render(request, 'statuses/create.html')
@@ -61,7 +61,7 @@ class UpdateStatus(CustomLoginRequiredMixin, View):
         )
 
 
-class DeleteStatus(View):
+class DeleteStatus(CustomLoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
         status_pk = kwargs.get('pk')
