@@ -36,3 +36,6 @@ class TaskModel(models.Model):
     def get_absolute_url(self):
         url = 'tasks'
         return url
+
+    def __str__(self):
+        return self.name

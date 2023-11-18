@@ -1,7 +1,6 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.utils.translation import gettext as _
 from django.contrib.auth.models import User
@@ -17,7 +16,7 @@ class SpecificTaskView(View):
 
     def get(self, request, *args, **kwargs):
         task_id = kwargs.get('pk')
-        task = TaskModel.objects.get(id=task_id)
+        task = get_object_or_404(TaskModel, id=task_id)
         return render(request, 'tasks/view_task.html', {'task': task})
 
 
@@ -55,7 +54,6 @@ class CreateTaskView(CustomLoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
-        self.object = form.save()
         return super().form_valid(form)
 
     def get(self, request, *args, **kwargs):
@@ -94,7 +92,7 @@ class UpdateTaskView(CustomLoginRequiredMixin, View):
         tasks = TaskModel.objects.all()
         tags = ''
         task_id = kwargs.get('pk')
-        task = TaskModel.objects.get(id=task_id)
+        task = get_object_or_404(TaskModel, id=task_id)
         form = TaskModelForm(instance=task)
         return render(
             request,
@@ -112,7 +110,7 @@ class UpdateTaskView(CustomLoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         task_id = kwargs.get('pk')
-        task = TaskModel.objects.get(id=task_id)
+        task = get_object_or_404(TaskModel, id=task_id)
         form = TaskModelForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
@@ -130,7 +128,7 @@ class DeleteTaskView(CustomAccessMixin, View):
 
     def get(self, request, *args, **kwargs):
         task_id = kwargs.get('pk')
-        task = TaskModel.objects.get(id=task_id)
+        task = get_object_or_404(TaskModel, id=task_id)
         return render(
             request,
             'tasks/delete.html',
@@ -139,11 +137,7 @@ class DeleteTaskView(CustomAccessMixin, View):
 
     def post(self, request, *args, **kwargs):
         task_id = kwargs.get('pk')
-        task = TaskModel.objects.get(id=task_id)
-        if task:
-            task.delete()
-            messages.success(
-                request,
-                _('Task deleted successfully!')
-            )
+        task = get_object_or_404(TaskModel, id=task_id)
+        task.delete()
+        messages.success(request, _('Task deleted successfully!'))
         return redirect('tasks')

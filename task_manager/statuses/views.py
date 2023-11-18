@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.utils.translation import gettext as _
 
@@ -37,7 +37,7 @@ class UpdateStatus(CustomLoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
         status_pk = kwargs.get('pk')
-        status = StatusModel.objects.get(id=status_pk)
+        status = get_object_or_404(StatusModel, id=status_pk)
         form = StatusModelForm(instance=status)
         return render(
             request,
@@ -47,7 +47,7 @@ class UpdateStatus(CustomLoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         status_pk = kwargs.get('pk')
-        status = StatusModel.objects.get(id=status_pk)
+        status = get_object_or_404(StatusModel, id=status_pk)
         form = StatusModelForm(request.POST, instance=status)
         if form.is_valid():
             form.save()
@@ -65,7 +65,7 @@ class DeleteStatus(CustomLoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
         status_pk = kwargs.get('pk')
-        status = StatusModel.objects.get(id=status_pk)
+        status = get_object_or_404(StatusModel, id=status_pk)
         return render(
             request,
             'statuses/delete.html',
@@ -74,11 +74,10 @@ class DeleteStatus(CustomLoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         status_pk = kwargs.get('pk')
-        status = StatusModel.objects.get(id=status_pk)
-        if status:
-            status.delete()
-            messages.success(
-                request,
-                _('Status deleted successfully!')
-            )
+        status = get_object_or_404(StatusModel, id=status_pk)
+        status.delete()
+        messages.success(
+            request,
+            _('Status deleted successfully!')
+        )
         return redirect('statuses')

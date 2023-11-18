@@ -7,12 +7,8 @@ from django.core.exceptions import ObjectDoesNotExist
 class StatusCodeTestCase(TestCase):
 
     def setUp(self):
-        User.objects.create(username='lion', password='111')
-        User.objects.create(username='user', password='123')
-        self.logged_user = User.objects.get(username='lion')
-        self.anonim_user = User.objects.get(username='user')
-        self.anonim_user_pk = self.anonim_user.id
-        self.logged_user_pk = self.logged_user.id
+        self.logged_user = User.objects.create(username='lion', password='111')
+        self.anonim_user = User.objects.create(username='user', password='123')
 
     def test_users_url(self):
         response = self.client.get('/users/')
@@ -31,11 +27,11 @@ class StatusCodeTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_change_url_anonim(self):
-        response = self.client.get(f'/users/{self.logged_user_pk}/update/')
+        response = self.client.get(f'/users/{self.logged_user.id}/update/')
         self.assertRedirects(response, '/login/')
 
     def test_delete_url_anonim(self):
-        response = self.client.get(f'/users/{self.anonim_user_pk}/delete/')
+        response = self.client.get(f'/users/{self.anonim_user.id}/delete/')
         self.assertRedirects(response, '/login/')
 
 
@@ -49,7 +45,7 @@ class UsersCUDTestCase(TestCase):
         self.data = {
             'valid_user': {
                 'username': '@user',
-                'first_mame': 'Ivan',
+                'first_name': 'Ivan',
                 'last_name': 'Ivanov',
                 'password1': '111',
                 'password2': '111'
@@ -127,12 +123,11 @@ class UsersCUDTestCase(TestCase):
     def test_delete_user(self):
         user = User.objects.create(**self.user_data)
         self.client._login(user)
-        user_pk = user.id
-        url = reverse('delete_user', kwargs={'pk': user_pk})
+        url = reverse('delete_user', kwargs={'pk': user.id})
         self.client.post(url)
 
         with self.assertRaises(ObjectDoesNotExist):
-            User.objects.get(id=user_pk)
+            User.objects.get(id=user.id)
 
     def test_delete_user_without_access(self):
         logged_user = User.objects.create(**self.user_data)

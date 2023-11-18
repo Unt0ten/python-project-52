@@ -12,3 +12,6 @@ class StatusModel(models.Model):
         }
     )
     date_creation = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.name

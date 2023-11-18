@@ -14,7 +14,7 @@ class CustomLoginRequiredMixin(LoginRequiredMixin):
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             messages.warning(request, self.permission_denied_message)
-            return self.handle_no_permission()
+            return redirect('login')
 
         return super().dispatch(request, *args, **kwargs)
 
