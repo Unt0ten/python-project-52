@@ -1,18 +1,10 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from .models import TaskModel
 
 
 class TaskModelForm(forms.ModelForm):
-
-    # def __init__(self, user_info, *args, **kwargs):
-    #     self.user_info = user_info
-    #     super().__init__(*args, **kwargs)
-    #
-    # def save(self, *args, **kwargs):
-    #     self.instance.author = self.user_info
-    #     return super().save(*args, **kwargs)
-
     class Meta:
         model = TaskModel
         fields = [
@@ -20,5 +12,25 @@ class TaskModelForm(forms.ModelForm):
             'description',
             'status',
             'executor',
+            'labels'
         ]
-        # widgets = {'author': forms.HiddenInput()}
+        widgets = {
+            'name': forms.TextInput(
+                attrs={'class': 'form-control mb-2', 'placeholder': _('Name')},
+            ),
+            'description': forms.Textarea(
+                attrs={
+                    'class': 'form-control mb-2',
+                    'placeholder': _('Description')
+                }
+            ),
+            'status': forms.Select(
+                attrs={'class': 'form-control mb-2 form-select'}
+            ),
+            'executor': forms.Select(
+                attrs={'class': 'form-control mb-2 form-select'}
+            ),
+            'labels': forms.SelectMultiple(
+                attrs={'class': 'form-control mb-2'}
+            )
+        }

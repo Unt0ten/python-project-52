@@ -1,10 +1,10 @@
 from django.contrib import admin
 from django.contrib.admin import DateFieldListFilter
 
-from .models import StatusModel
+from .models import LabelModel
 
 
-@admin.register(StatusModel)
+@admin.register(LabelModel)
 class CustomUserAdmin(admin.ModelAdmin):
     list_display = ('name',
                     'created_at')

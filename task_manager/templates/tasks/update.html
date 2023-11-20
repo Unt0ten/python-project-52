@@ -5,63 +5,20 @@
 
 {% block main %}
 
-  <h1 class="my-4">{% translate 'Update task' %}</h1>
-  <form action="{% url 'update_task' task.id %}" method="post">
-    {% csrf_token %}
-
-    <div class="mb-3"><label class="form-label" for="id_name">{% translate 'Name' %}</label><input
-        type="text" name="name"
-        maxlength="150"
-        value='{{ task.name }}'
-        class="form-control"
-        placeholder="{% translate 'Name' %}" required
-        id="id_name"></div>
-    {% if form.errors %}
-      <div class="text-danger">{{ form.name.errors }}</div>
-    {% endif %}
-    <div class="mb-3"><label class="form-label" for="id_description">{% translate 'Description' %}</label><textarea
-        name="description"
-        cols="40" rows="10"
-        class="form-control"
-        placeholder={% translate 'Description' %}
-            id="id_description">{{ task.description }}</textarea>
-    </div>
-    <div class="mb-3"><label class="form-label" for="id_status">{% translate 'Status' %}</label><select name="status"
-                                                                                                        class="form-select"
-                                                                                                        required
-                                                                                                        id="id_status">
-      <option value="">---------</option>
-      <option value="{{ task.status.id }}" selected>{{ task.status.name }}</option>
-      {% for status in statuses %}
-        {% if status.id != task.status.id %}
-          <option value="{{ status.id }}">{{ status.name }}</option>
-        {% endif %}
-      {% endfor %}
-    </select>
-      <div class="mb-3"><label class="form-label" for="id_executor">{% translate 'Executor' %}</label><select
-          name="executor"
-          class="form-select"
-          id="id_executor">
-        <option value="">---------</option>
-        <option value="{{ task.executor.id }}" selected>{{ task.executor.get_full_name }}</option>
-        {% for user in users %}
-          {% if user.id != task.executor.id %}
-            <option value="{{ user.id }}">{{ user.get_full_name }}</option>
-          {% endif %}
+    <h1 class="my-4">{% translate 'Update task' %}</h1>
+    <form action="{% url 'update_task' object.id %}" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="mb-2">{{ field.label }}</div>
+            <div>{{ field }}</div>
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    <li class="text-danger">
+                        {{ error }}
+                    </li>
+                {% endfor %}
+            {% endif %}
         {% endfor %}
-      </select>
-        <div class="mb-3"><label class="form-label" for="id_labels">{% translate 'Tags' %}</label><select name="labels"
-                                                                                                          class="form-select"
-                                                                                                          id="id_labels"
-                                                                                                          multiple>
-          {#          {% for tag in tags %}#}
-          {#          <option value="{{ tag.id }}">{{ tag.name }}</option>#}
-          {#          {% endfor %}#}
-        </select>
-
-          <input class="btn btn-outline-success my-2" type="submit" value="{% translate 'Update' %}">
-        </div>
-      </div>
-    </div>
-  </form>
+        <input class="btn btn-outline-success my-2" type="submit" value="{% translate 'Update' %}">
+    </form>
 {% endblock main %}

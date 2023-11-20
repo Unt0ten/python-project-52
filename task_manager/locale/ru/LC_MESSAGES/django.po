@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-18 09:44+0700\n"
+"POT-Creation-Date: 2023-11-18 11:04+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,14 +20,13 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: statuses/mixins.py:10 tasks/mixins.py:12 tasks/mixins.py:28
-#: users/mixins.py:12
-msgid "You are not authorized! Please log in."
-msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
-
-#: statuses/models.py:11
+#: labels/models.py:10 statuses/models.py:11
 msgid "Task status with such Name already exist."
 msgstr "Статус задачи с таким именем уже существует"
+
+#: mixins_login.py:10 tasks/mixins.py:15
+msgid "You are not authorized! Please log in."
+msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
 #: statuses/views.py:29
 msgid "Status successfully created"
@@ -41,7 +40,7 @@ msgstr "Статус успешно изменен!"
 msgid "Status deleted successfully!"
 msgstr "Статус успешно удален!"
 
-#: tasks/mixins.py:38
+#: tasks/mixins.py:25
 msgid "Only its author can delete a task"
 msgstr "Удалить задачу может только ее автор"
 
@@ -49,15 +48,15 @@ msgstr "Удалить задачу может только ее автор"
 msgid "Task with such Name already exist."
 msgstr "Задача с таким именем уже существует"
 
-#: tasks/views.py:80
+#: tasks/views.py:81
 msgid "Your task has been successfully created!"
 msgstr "Ваша задача успешно создана!"
 
-#: tasks/views.py:117
+#: tasks/views.py:118
 msgid "Task successfully changed"
 msgstr "Задача успешно изменена!"
 
-#: tasks/views.py:142
+#: tasks/views.py:143
 msgid "Task deleted successfully!"
 msgstr "Задача успешно удалена!"
 
@@ -85,35 +84,42 @@ msgstr "Выполнил"
 msgid "Home"
 msgstr "Главная"
 
-#: templates/header.html:11 templates/users/users.html:4
+#: templates/header.html:12 templates/users/users.html:4
 #: templates/users/users.html:8
 msgid "Users"
 msgstr "Пользователи"
 
-#: templates/header.html:15 templates/users/login.html:8
+#: templates/header.html:17 templates/users/login.html:8
 msgid "Entrance"
 msgstr "Войти"
 
-#: templates/header.html:17 templates/users/create.html:5
+#: templates/header.html:19 templates/users/create.html:5
 #: templates/users/create.html:10
 msgid "Registration"
 msgstr "Регистрация"
 
-#: templates/header.html:23
+#: templates/header.html:25
 msgid "User"
 msgstr "Пользователь"
 
-#: templates/header.html:38 templates/statuses/statuses.html:4
+#: templates/header.html:41 templates/labels/labels.html:4
+#: templates/labels/labels.html:8
+#, fuzzy
+#| msgid "Label"
+msgid "Labels"
+msgstr "Метка"
+
+#: templates/header.html:43 templates/statuses/statuses.html:4
 #: templates/statuses/statuses.html:8
 msgid "Statuses"
 msgstr "Статусы"
 
-#: templates/header.html:40 templates/tasks/tasks.html:4
+#: templates/header.html:45 templates/tasks/tasks.html:4
 #: templates/tasks/tasks.html:8
 msgid "Tasks"
 msgstr "Задачи"
 
-#: templates/header.html:41
+#: templates/header.html:47
 msgid "Logout"
 msgstr "Выйти"
 
@@ -131,6 +137,41 @@ msgstr ""
 "исполнителей и менять их статусы. Для работы с системой требуется "
 "регистрация и аутентификация."
 
+#: templates/labels/labels.html:9
+#, fuzzy
+#| msgid "Create task"
+msgid "Create label"
+msgstr "Создать задачу"
+
+#: templates/labels/labels.html:15 templates/statuses/create.html:15
+#: templates/statuses/statuses.html:15 templates/statuses/update.html:11
+#: templates/statuses/update.html:13 templates/tasks/create.html:12
+#: templates/tasks/create.html:16 templates/tasks/tasks.html:51
+#: templates/tasks/update.html:12 templates/tasks/update.html:17
+msgid "Name"
+msgstr "Имя"
+
+#: templates/labels/labels.html:16 templates/statuses/statuses.html:16
+#: templates/tasks/tasks.html:55 templates/tasks/view_task.html:30
+#: templates/users/users.html:15
+msgid "Date of creation"
+msgstr "Дата создания"
+
+#: templates/labels/labels.html:28 templates/statuses/statuses.html:28
+#: templates/statuses/update.html:16 templates/statuses/update.html:18
+#: templates/tasks/tasks.html:69 templates/tasks/update.html:62
+#: templates/tasks/view_task.html:45 templates/users/update.html:68
+#: templates/users/users.html:28
+msgid "Update"
+msgstr "Изменить"
+
+#: templates/labels/labels.html:30 templates/statuses/delete.html:12
+#: templates/statuses/statuses.html:30 templates/tasks/delete.html:13
+#: templates/tasks/tasks.html:71 templates/tasks/view_task.html:47
+#: templates/users/delete.html:12 templates/users/users.html:30
+msgid "Delete"
+msgstr "Удалить"
+
 #: templates/statuses/create.html:4 templates/statuses/create.html:7
 #: templates/statuses/statuses.html:9
 msgid "Create status"
@@ -140,14 +181,6 @@ msgstr "Создать статус"
 #: templates/users/create.html:22 templates/users/update.html:12
 #: templates/users/update.html:18
 msgid "Fist name"
-msgstr "Имя"
-
-#: templates/statuses/create.html:15 templates/statuses/statuses.html:15
-#: templates/statuses/update.html:11 templates/statuses/update.html:13
-#: templates/tasks/create.html:12 templates/tasks/create.html:16
-#: templates/tasks/tasks.html:51 templates/tasks/update.html:12
-#: templates/tasks/update.html:17
-msgid "Name"
 msgstr "Имя"
 
 #: templates/statuses/create.html:20 templates/tasks/create.html:54
@@ -165,25 +198,6 @@ msgstr "Удалить статус"
 #: templates/statuses/delete.html:8
 msgid "Are you sure you want to delete the status"
 msgstr "Вы уверены, что хотите удалить статус"
-
-#: templates/statuses/delete.html:12 templates/statuses/statuses.html:30
-#: templates/tasks/delete.html:13 templates/tasks/tasks.html:71
-#: templates/tasks/view_task.html:47 templates/users/delete.html:12
-#: templates/users/users.html:30
-msgid "Delete"
-msgstr "Удалить"
-
-#: templates/statuses/statuses.html:16 templates/tasks/tasks.html:55
-#: templates/tasks/view_task.html:30 templates/users/users.html:15
-msgid "Date of creation"
-msgstr "Дата создания"
-
-#: templates/statuses/statuses.html:28 templates/statuses/update.html:16
-#: templates/statuses/update.html:18 templates/tasks/tasks.html:69
-#: templates/tasks/update.html:62 templates/tasks/view_task.html:45
-#: templates/users/update.html:68 templates/users/users.html:28
-msgid "Update"
-msgstr "Изменить"
 
 #: templates/statuses/update.html:4 templates/statuses/update.html:7
 msgid "Update status"
@@ -298,7 +312,7 @@ msgstr "Имя пользователя"
 msgid "Full name"
 msgstr "Полное имя"
 
-#: users/mixins.py:20
+#: users/mixins.py:13
 msgid "You don't have permission to change other user."
 msgstr "У вас нет прав на изменения другого пользователя."
 
@@ -336,9 +350,6 @@ msgstr "Вы вышли из системы"
 
 #~ msgid "Change"
 #~ msgstr "Изменить"
-
-#~ msgid "Label"
-#~ msgstr "Метка"
 
 #~ msgid ""
 #~ "Obligatory field. No more than 150 characters. Only letters, numbers and "

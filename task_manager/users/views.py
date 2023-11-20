@@ -2,97 +2,64 @@ from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.db.models import ProtectedError
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from django.views import View
 from django.utils.translation import gettext as _
+from django.urls import reverse_lazy
 
-
+from task_manager.mixins_login import CustomLoginRequiredMixin
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .mixins import CustomAccessMixin
 
 
-class UsersView(View):
+class UsersView(ListView):
 
-    def get(self, request, *args, **kwargs):
-        users = User.objects.filter(is_staff=False)
-        return render(request, 'users/users.html', context={'users': users})
-
-
-class UserFormCreateView(View):
-
-    def get(self, request, *args, **kwargs):
-        user_form = CustomUserCreationForm()
-        return render(request, 'users/create.html', {'form': user_form})
-
-    def post(self, request, *args, **kwargs):
-        user_form = CustomUserCreationForm(request.POST)
-
-        if user_form.is_valid():
-            new_user = user_form.save(commit=False)
-            new_user.set_password(user_form.cleaned_data['password1'])
-            new_user.save()
-            messages.success(
-                request, _('Your profile has been successfully created!')
-            )
-            return redirect('login')
-
-        return render(request, 'users/create.html', {'form': user_form})
+    template_name = 'users/users.html'
+    model = User
+    context_object_name = 'users'
 
 
-class UserFormUpdateView(CustomAccessMixin, View):
+class UserFormCreateView(CreateView):
 
-    def get(self, request, *args, **kwargs):
-        user_id = kwargs.get('pk')
-        user = get_object_or_404(User, id=user_id)
-        form = CustomUserChangeForm(instance=user)
-        return render(
-            request,
-            'users/update.html',
-            {'form': form, 'user_id': user_id}
+    template_name = 'users/create.html'
+    form_class = CustomUserCreationForm
+    success_url = reverse_lazy('login')
+
+    def form_valid(self, form):
+        messages.success(
+            self.request, _('Your profile has been successfully created!')
         )
-
-    def post(self, request, *args, **kwargs):
-        user_id = kwargs.get('pk')
-        user = get_object_or_404(User, id=user_id)
-        form = CustomUserChangeForm(request.POST, instance=user)
-        if form.is_valid():
-            form.save()
-            messages.success(request, _('User successfully changed'))
-            return redirect('users')
-        return render(
-            request,
-            'users/update.html',
-            {'form': form, 'user_id': user_id}
-        )
+        return super().form_valid(form)
 
 
-class UserFormDeleteView(CustomAccessMixin, View):
+class UserFormUpdateView(
+    CustomLoginRequiredMixin,
+    CustomAccessMixin,
+    UpdateView
+):
+    model = User
+    template_name = 'users/update.html'
+    form_class = CustomUserChangeForm
+    success_url = reverse_lazy('users')
 
-    def get(self, request, *args, **kwargs):
-        user_id = kwargs.get('pk')
-        user = get_object_or_404(User, id=user_id)
-        return render(
-            request,
-            'users/delete.html',
-            {'user_id': user_id, 'user': user}
-        )
+    def form_valid(self, form):
+        messages.success(self.request, _('User successfully changed'))
+        return super().form_valid(form)
 
-    def post(self, request, *args, **kwargs):
-        user_id = kwargs.get('pk')
-        user = get_object_or_404(User, id=user_id)
-        if user:
-            try:
-                user.delete()
-                messages.success(
-                    request,
-                    _('User deleted successfully!'))
-            except ProtectedError:
-                messages.warning(
-                    request,
-                    _('Cannot delete user because it is in use')
-                )
-            return redirect('users')
+
+class UserFormDeleteView(
+    CustomLoginRequiredMixin,
+    CustomAccessMixin,
+    DeleteView
+):
+    model = User
+    template_name = 'users/delete.html'
+    success_url = reverse_lazy('users')
+
+    def form_valid(self, form):
+        messages.success(self.request, _('User deleted successfully!'))
+        return super().form_valid(form)
 
 
 class LoginUser(View):

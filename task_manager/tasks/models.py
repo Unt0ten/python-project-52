@@ -1,9 +1,11 @@
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
 
 from task_manager.statuses.models import StatusModel
+from task_manager.labels.models import LabelModel
 
 
 class TaskModel(models.Model):
@@ -12,30 +14,44 @@ class TaskModel(models.Model):
         unique=True,
         error_messages={
             "unique": _("Task with such Name already exist."),
-        }
+        },
+        verbose_name=_('Name')
     )
-    description = models.TextField(max_length=1000)
+    description = models.TextField(
+        max_length=1000,
+        verbose_name=_('Description'),
+        null=True,
+        blank=True,
+    )
     status = models.ForeignKey(
         StatusModel,
         on_delete=models.PROTECT,
+        verbose_name=_('Status')
     )
     author = models.ForeignKey(
         User,
         on_delete=models.PROTECT,
-        related_name='author',
+        verbose_name=_('Author'),
+        related_name='author'
     )
     executor = models.ForeignKey(
         User,
         on_delete=models.PROTECT,
+        verbose_name=_('Executor'),
         related_name='executor',
         null=True,
         blank=True,
+
+    )
+    labels = models.ManyToManyField(
+        LabelModel,
+        blank=True,
+        verbose_name=_('Labels')
     )
     created_at = models.DateTimeField(default=timezone.now)
 
     def get_absolute_url(self):
-        url = 'tasks'
-        return url
+        return reverse('tasks')
 
     def __str__(self):
         return self.name

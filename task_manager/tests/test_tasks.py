@@ -5,6 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from task_manager.tasks.models import TaskModel
 from task_manager.statuses.models import StatusModel
+# from task_manager.labels.models import LabelModel
 
 
 class TasksCodeTestCase(TestCase):
@@ -12,12 +13,14 @@ class TasksCodeTestCase(TestCase):
     def setUp(self):
         self.user = User.objects.create(username='lion', password='111')
         self.status = StatusModel.objects.create(name='status')
+        # self.labels = LabelModel.objects.create(name='labels')
         self.user_pk = self.user.id
         self.task = TaskModel.objects.create(
             name='task',
             description='about task',
             status=self.status,
             author=self.user,
+            # labels=self.labels,
         )
 
     def test_tasks_url(self):
@@ -81,24 +84,29 @@ class TasksCUDTestCase(TestCase):
         cls.author = User.objects.create(**author_data)
         cls.executor = User.objects.create(**executor_data)
         cls.status = StatusModel.objects.create(name='status')
+        # cls.labels = LabelModel.objects.create(name='labels')
+        # cls.labels_upd = LabelModel.objects.create(name='updated labels')
         cls.status_upd = StatusModel.objects.create(name='updated status')
 
         cls.task_fields = {
             'name': 'Task',
             'description': 'This is task',
             'status': cls.status.pk,
+            # 'labels': cls.labels.pk,
             'executor': cls.author.pk,
         }
         cls.task_fields_upd = {
             'name': 'Task upd',
             'description': 'This is task upd',
             'status': cls.status_upd.pk,
+            # 'labels': cls.labels_upd.pk,
             'executor': cls.executor.pk,
         }
         cls.task_data1 = {
             'name': 'Task',
             'description': 'This is task',
             'status': cls.status,
+            # 'labels': cls.labels.pk,
             'executor': cls.author,
             'author': cls.author
         }
@@ -106,6 +114,7 @@ class TasksCUDTestCase(TestCase):
             'name': 'Task',
             'description': 'This is task',
             'status': cls.status,
+            # 'labels': cls.labels.pk,
             'executor': cls.author,
             'author': cls.executor
         }

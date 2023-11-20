@@ -4,19 +4,21 @@
 {% block title %}{% translate 'Create status' %}{% endblock %}
 
 {% block main %}
-  <h1>{% translate 'Create status' %}</h1>
-  <form action="{% url 'create_status' %}" method="post">
-    {% csrf_token %}
+    <h1>{% translate 'Create status' %}</h1>
+    <form action="{% url 'create_status' %}" method="post">
+        {% csrf_token %}
 
-    <div class="mb-3"><label class="form-label" for="id_name">{% translate 'Fist name' %}</label><input
-        type="text" name="name"
-        maxlength="150"
-        class="form-control"
-        placeholder="{% translate 'Name' %}" required
-        id="id_name"></div>
-    {% if form.errors %}
-          <div class="text-danger">{{ form.name.errors }}</div>
-    {% endif %}
-  <input class="btn btn-outline-success my-2" type="submit" value="{% translate 'Create' %}">
-  </form>
+        {% for field in form %}
+            <div class="mb-2">{{ field.label }}</div>
+            <div>{{ field }}</div>
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    <li class="text-danger">
+                        {{ error }}
+                    </li>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+        <input class="btn btn-outline-success my-2" type="submit" value="{% translate 'Create' %}">
+    </form>
 {% endblock %}

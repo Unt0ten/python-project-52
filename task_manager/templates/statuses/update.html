@@ -5,16 +5,20 @@
 
 {% block main %}
   <h1>{% translate 'Update status' %}</h1>
-  <form action="{% url 'update_status' pk=status_pk %}" method="post">
+  <form action="{% url 'update_status' object.id %}" method="post">
     {% csrf_token %}
 
-    <div class="mb-3"><label class="form-label" for="id_name">{% translate 'Name' %}</label>
-      <input type="text" name="name" maxlength="150" value="{{ status.name }}" class="form-control"
-             placeholder="{% translate 'Name' %}" required id="id_name">
-    </div>
-    {% if form.errors %}
-      <div class="text-danger">{% translate 'Update' %}{{ form.name.errors }}</div>
-    {% endif %}
+    {% for field in form %}
+            <div class="mb-2">{{ field.label }}</div>
+            <div>{{ field }}</div>
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    <li class="text-danger">
+                        {{ error }}
+                    </li>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
     <input class="btn btn-outline-success my-2" type="submit" value="{% translate 'Update' %}">
   </form>
 {% endblock %}

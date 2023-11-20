@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% translate 'Update label' %}{% endblock %}
+
+{% block main %}
+  <h1>{% translate 'Update status' %}</h1>
+  <form action="{% url 'update_label' pk=label_pk %}" method="post">
+    {% csrf_token %}
+
+    <div class="mb-3"><label class="form-label" for="id_name">{% translate 'Name' %}</label>
+      <input type="text" name="name" maxlength="150" value="{{ label.name }}" class="form-control"
+             placeholder="{% translate 'Name' %}" required id="id_name">
+    </div>
+    {% if form.errors %}
+      <div class="text-danger">{% translate 'Update' %}{{ form.name.errors }}</div>
+    {% endif %}
+    <input class="btn btn-outline-success my-2" type="submit" value="{% translate 'Update' %}">
+  </form>
+{% endblock %}

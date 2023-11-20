@@ -1,22 +1,9 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin, AccessMixin
+from django.contrib.auth.mixins import AccessMixin
 from django.shortcuts import redirect
 from django.utils.translation import gettext as _
 
 from .models import TaskModel
-
-
-class CustomLoginRequiredMixin(LoginRequiredMixin):
-
-    login_url = '/login/'
-    permission_denied_message = _("You are not authorized! Please log in.")
-
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            messages.warning(request, self.permission_denied_message)
-            return redirect('login')
-
-        return super().dispatch(request, *args, **kwargs)
 
 
 class CustomAccessMixin(AccessMixin):

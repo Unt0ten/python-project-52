@@ -4,67 +4,27 @@
 {% block title %}{% translate 'Change user' %}{% endblock %}
 {% block main %}
 
-  <h1>{% translate 'Change user' %}</h1>
+    <h1>{% translate 'Change user' %}</h1>
 
-  <form action="{% url 'update_user' pk=user_id %}" method="post">
-    {% csrf_token %}
-
-    <div class="mb-3"><label class="form-label" for="id_first_name">{% translate 'Fist name' %}</label><input
-        type="text" name="first_name"
-        maxlength="150"
-        value={{ user.first_name }}
-            maxlength="150"
-        class="form-control"
-        placeholder="{% translate 'Fist name' %}" required
-        id="id_first_name"></div>
-    <div class="mb-3"><label class="form-label" for="id_last_name">{% translate 'Last name' %}</label><input type="text"
-                                                                                                             name="last_name"
-                                                                                                             value={{ user.last_name }}
-                                                                                                                 maxlength="150"
-                                                                                                             class="form-control"
-                                                                                                             placeholder="{% translate 'Last name' %}"
-                                                                                                             required
-                                                                                                             id="id_last_name">
-    </div>
-    <div class="mb-3"><label class="form-label" for="id_username">{% translate 'Username' %}</label><input type="text"
-                                                                                                           name="username"
-                                                                                                           value={{ user.username }}
-                                                                                                               maxlength="150"
-                                                                                                           autofocus
-                                                                                                           class="form-control"
-                                                                                                           placeholder="{% translate 'Username' %}"
-                                                                                                           required
-                                                                                                           id="id_username">
-      {% if form.errors %}
-        <div class="text-danger">{{ form.username.errors }}</div>
-      {% endif %}
-      <div class="form-text">{{ form.username.help_text }}</div>
-    </div>
-
-    <div class="mb-3"><label class="form-label" for="id_password">{% translate 'Password' %}</label><input
-        type="password" name="password"
-        autocomplete="new-password"
-        class="form-control"
-        placeholder="{% translate 'Password' %}" required
-        id="id_password">
-      <div class="form-text">
-        {{ form.password1.help_text }}
-      </div>
-    </div>
-    <div class="mb-3"><label class="form-label"
-                             for="id_password_confirmation">{% translate 'Password confirmation' %}</label><input
-        type="password"
-        name="password_confirmation"
-        autocomplete="new-password"
-        class="form-control"
-        placeholder="{% translate 'Password confirmation' %}"
-        required
-        id="id_password_confirmation">
-      {% if form.errors %}
-        <div class="text-danger">{{ form.password2.errors }}</div>
-      {% endif %}
-      <div class="form-text">{{ form.password2.help_text }}</div>
-    </div>
-    <input class="btn btn-outline-success my-2" type="submit" value="{% translate 'Update' %}">
-  </form>
+    <form action="{% url 'update_user' object.id %}" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            {% if field != form.password %}
+                <div class="mb-3"><label class="mb-2">{{ field.label }}</label>
+                <div>{{ field }}</div>
+                {% if field.help_text %}
+                    <small class="form-text text-muted">{{ field.help_text|safe }}</small>
+                {% endif %}
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        <li class="text-danger">
+                            {{ error }}
+                        </li>
+                    {% endfor %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        </div>
+        <input class="btn btn-outline-success my-2" type="submit" value="{% translate 'Update' %}">
+    </form>
 {% endblock %}
