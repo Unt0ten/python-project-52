@@ -7,8 +7,9 @@
   <h1 class="my-4 ">{% translate 'Deleting a label' %}</h1>
   <p>{% translate 'Are you sure you want to delete the label' %} {{ label.name }}?</p>
 
-  <form action="{% url 'delete_label' label.id %}" method="post">
+  <form action="{% url 'delete_label' object.id %}" method="post">
     {% csrf_token %}
+      {{ form.as_p }}
     <input class="btn btn-outline-danger my-2" type="submit" value="{% translate 'Delete' %}">
   </form>
 {% endblock %}

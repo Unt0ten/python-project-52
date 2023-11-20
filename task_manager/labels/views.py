@@ -1,7 +1,8 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views import View
+from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 
 from .models import LabelModel
 from .forms import LabelModelForm
@@ -9,83 +10,53 @@ from task_manager.mixins_login import CustomLoginRequiredMixin
 from task_manager.tasks.models import TaskModel
 
 
-class LabelsView(CustomLoginRequiredMixin, View):
-
-    def get(self, request, *args, **kwargs):
-        labels = LabelModel.objects.all()
-        return render(request, 'labels/labels.html', {'labels': labels})
-
-
-class CreateLabel(CustomLoginRequiredMixin, View):
-
-    def get(self, request, *args, **kwargs):
-        return render(request, 'labels/create.html')
-
-    def post(self, request, *args, **kwargs):
-        form = LabelModelForm(request.POST)
-
-        if form.is_valid():
-            form.save()
-            messages.success(
-                request, _('Label successfully created')
-            )
-            return redirect('labels')
-
-        return render(request, 'statuses/create.html', {'form': form})
+class LabelsView(CustomLoginRequiredMixin, ListView):
+    template_name = 'labels/labels.html'
+    model = LabelModel
+    context_object_name = 'labels'
 
 
-class UpdateLabel(CustomLoginRequiredMixin, View):
+class CreateLabel(CustomLoginRequiredMixin, CreateView):
+    template_name = 'labels/create.html'
+    form_class = LabelModelForm
 
-    def get(self, request, *args, **kwargs):
-        label_pk = kwargs.get('pk')
-        label = get_object_or_404(LabelModel, id=label_pk)
-        form = LabelModelForm(instance=label)
-        return render(
-            request,
-            'labels/update.html',
-            {'form': form, 'label_pk': label_pk, 'label': label}
+    def form_valid(self, form):
+        messages.success(
+            self.request, _('Label successfully created')
         )
+        return super().form_valid(form)
 
-    def post(self, request, *args, **kwargs):
-        label_pk = kwargs.get('pk')
-        label = get_object_or_404(LabelModel, id=label_pk)
-        form = LabelModelForm(request.POST, instance=label)
-        if form.is_valid():
-            form.save()
-            messages.success(request, _('Label successfully changed'))
-            return redirect('labels')
 
-        return render(
-            request,
-            'labels/update.html',
-            {'form': form, 'label_pk': label_pk}
+class UpdateLabel(CustomLoginRequiredMixin, UpdateView):
+    model = LabelModel
+    form_class = LabelModelForm
+    template_name = 'labels/update.html'
+
+    def form_valid(self, form):
+        messages.success(
+            self.request, _('Label successfully changed')
         )
+        return super().form_valid(form)
 
 
-class DeleteLabel(CustomLoginRequiredMixin, View):
+class DeleteLabel(CustomLoginRequiredMixin, DeleteView):
+    model = LabelModel
+    template_name = 'labels/delete.html'
+    success_url = reverse_lazy('labels')
 
-    def get(self, request, *args, **kwargs):
-        label_pk = kwargs.get('pk')
-        label = get_object_or_404(LabelModel, id=label_pk)
-        return render(
-            request,
-            'labels/delete.html',
-            {'label_pk': label_pk, 'label': label}
-        )
-
-    def post(self, request, *args, **kwargs):
-        label_pk = kwargs.get('pk')
+    def form_valid(self, form):
+        label_pk = self.kwargs.get('pk')
         label = get_object_or_404(LabelModel, id=label_pk)
         tasks = TaskModel.objects.filter(labels=label_pk)
         if tasks:
             messages.warning(
-                request,
+                self.request,
                 _('Cannot remove label because it is in use')
             )
             return redirect('labels')
         label.delete()
         messages.success(
-            request,
+            self.request,
             _('Label deleted successfully!')
         )
         return redirect('labels')
