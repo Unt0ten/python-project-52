@@ -4,3 +4,4 @@ SECRET_KEY = some_key
 DEBUG = true/false
 LOCAL_HOST = 127.0.0.1
 DATABASE_URL = sqlite:///db.sqlite3 or other
+ACCESS_TOKEN = some_key
