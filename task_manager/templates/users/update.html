@@ -1,6 +1,8 @@
 {% extends 'layout.html' %}
 {% load i18n %}
 {% load static %}
+{% load django_bootstrap5 %}
+
 {% block title %}{% translate 'Change user' %}{% endblock %}
 {% block main %}
 
@@ -8,23 +10,10 @@
 
     <form action="{% url 'update_user' object.id %}" method="post">
         {% csrf_token %}
-        {% for field in form %}
-            {% if field != form.password %}
-                <div class="mb-3"><label class="mb-2">{{ field.label }}</label>
-                <div>{{ field }}</div>
-                {% if field.help_text %}
-                    <small class="form-text text-muted">{{ field.help_text|safe }}</small>
-                {% endif %}
-                {% if field.errors %}
-                    {% for error in field.errors %}
-                        <li class="text-danger">
-                            {{ error }}
-                        </li>
-                    {% endfor %}
-                {% endif %}
-            {% endif %}
-        {% endfor %}
-        </div>
+
+        {% bootstrap_form_errors form %}
+        {% bootstrap_form form %}
+
         <input class="btn btn-outline-success my-2" type="submit" value="{% translate 'Update' %}">
     </form>
 {% endblock %}

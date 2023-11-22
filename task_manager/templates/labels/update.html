@@ -1,6 +1,8 @@
 {% extends 'layout.html' %}
 {% load i18n %}
 {% load static %}
+{% load django_bootstrap5 %}
+
 {% block title %}{% translate 'Update label' %}{% endblock %}
 
 {% block main %}
@@ -8,17 +10,7 @@
     <form action="{% url 'update_label' object.id %}" method="post">
         {% csrf_token %}
 
-        {% for field in form %}
-            <div class="mb-2">{{ field.label }}</div>
-            <div>{{ field }}</div>
-            {% if field.errors %}
-                {% for error in field.errors %}
-                    <li class="text-danger">
-                        {{ error }}
-                    </li>
-                {% endfor %}
-            {% endif %}
-        {% endfor %}
+        {% bootstrap_form form %}
         <input class="btn btn-outline-success my-2" type="submit" value="{% translate 'Update' %}">
     </form>
 {% endblock %}

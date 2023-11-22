@@ -1,7 +1,6 @@
 from django.views import generic
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.db.models import Q
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
 
@@ -11,6 +10,7 @@ from task_manager.mixins_login import CustomLoginRequiredMixin
 from .models import TaskModel
 from .forms import TaskModelForm
 from .mixins import CustomAccessMixin
+from .task_filter import TaskFilter
 
 
 class SpecificTaskView(generic.DetailView):
@@ -26,25 +26,18 @@ class TasksView(CustomLoginRequiredMixin, generic.ListView):
     context_object_name = 'tasks'
 
     def get_queryset(self):
-        if not self.request.GET:
-            return TaskModel.objects.all()
-        filters = Q()
-        for key in ['status', 'executor', 'label', 'author']:
-            value = self.request.GET.get(key)
-            if value:
-                if value == 'on':
-                    value = self.request.user.id
-                elif key == 'label':
-                    key = 'labels'
-                filters &= Q(**{f'{key}': value})
-
-        return TaskModel.objects.filter(filters)
+        tasks = TaskModel.objects.all()
+        tasks_filtered = TaskFilter(
+            self.request.GET, queryset=tasks, request=self.request
+        )
+        return tasks_filtered
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['statuses'] = StatusModel.objects.all()
         context['executors'] = User.objects.all()
         context['labels'] = LabelModel.objects.all()
+        context['filter'] = self.get_queryset()
         return context
 
 

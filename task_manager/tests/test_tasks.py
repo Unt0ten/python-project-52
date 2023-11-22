@@ -150,3 +150,7 @@ class TasksCUDTestCase(TestCase):
         response = self.client.get(f'/tasks/{task.id}/delete/')
 
         self.assertRedirects(response, '/tasks/')
+
+
+class FilterTasksTestCase(TestCase):
+    pass

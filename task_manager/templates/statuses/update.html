@@ -1,24 +1,16 @@
 {% extends 'layout.html' %}
 {% load i18n %}
 {% load static %}
+{% load django_bootstrap5 %}
+
 {% block title %}{% translate 'Update status' %}{% endblock %}
 
 {% block main %}
-  <h1>{% translate 'Update status' %}</h1>
-  <form action="{% url 'update_status' object.id %}" method="post">
-    {% csrf_token %}
+    <h1>{% translate 'Update status' %}</h1>
+    <form action="{% url 'update_status' object.id %}" method="post">
+        {% csrf_token %}
 
-    {% for field in form %}
-            <div class="mb-2">{{ field.label }}</div>
-            <div>{{ field }}</div>
-            {% if field.errors %}
-                {% for error in field.errors %}
-                    <li class="text-danger">
-                        {{ error }}
-                    </li>
-                {% endfor %}
-            {% endif %}
-        {% endfor %}
-    <input class="btn btn-outline-success my-2" type="submit" value="{% translate 'Update' %}">
-  </form>
+        {% bootstrap_form form %}
+        <input class="btn btn-outline-success my-2" type="submit" value="{% translate 'Update' %}">
+    </form>
 {% endblock %}
