@@ -5,7 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from task_manager.tasks.models import TaskModel
 from task_manager.statuses.models import StatusModel
-# from task_manager.labels.models import LabelModel
+from task_manager.labels.models import LabelModel
 
 
 class TasksCodeTestCase(TestCase):
