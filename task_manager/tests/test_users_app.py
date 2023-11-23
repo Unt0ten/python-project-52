@@ -1,10 +1,13 @@
 from django.contrib.auth.models import User
-from django.test import TestCase
+from django import test
 from django.shortcuts import reverse
 from django.core.exceptions import ObjectDoesNotExist
 
 
-class StatusCodeTestCase(TestCase):
+@test.modify_settings(MIDDLEWARE={'remove': [
+    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
+]})
+class StatusCodeTestCase(test.TestCase):
 
     def setUp(self):
         self.logged_user = User.objects.create(username='lion', password='111')
@@ -35,7 +38,10 @@ class StatusCodeTestCase(TestCase):
         self.assertRedirects(response, '/login/')
 
 
-class UsersCUDTestCase(TestCase):
+@test.modify_settings(MIDDLEWARE={'remove': [
+    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
+]})
+class UsersCUDTestCase(test.TestCase):
 
     def setUp(self):
         self.changeable_user = User.objects.create(

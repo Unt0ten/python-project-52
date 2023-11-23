@@ -1,14 +1,17 @@
 from django.contrib.auth.models import User
-from django.test import TestCase
 from django.shortcuts import reverse
 from django.core.exceptions import ObjectDoesNotExist
+from django import test
 
 from task_manager.tasks.models import TaskModel
 from task_manager.statuses.models import StatusModel
 from task_manager.labels.models import LabelModel
 
 
-class TasksCodeTestCase(TestCase):
+@test.modify_settings(MIDDLEWARE={'remove': [
+    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
+]})
+class TasksCodeTestCase(test.TestCase):
 
     def setUp(self):
         self.user = User.objects.create(username='lion', password='111')
@@ -65,7 +68,10 @@ class TasksCodeTestCase(TestCase):
         self.assertRedirects(response, '/tasks/')
 
 
-class TasksCUDTestCase(TestCase):
+@test.modify_settings(MIDDLEWARE={'remove': [
+    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
+]})
+class TasksCUDTestCase(test.TestCase):
 
     @classmethod
     def setUpTestData(cls):
@@ -152,5 +158,99 @@ class TasksCUDTestCase(TestCase):
         self.assertRedirects(response, '/tasks/')
 
 
-class FilterTasksTestCase(TestCase):
-    pass
+@test.modify_settings(MIDDLEWARE={'remove': [
+    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
+]})
+class FilterTasksTestCase(test.TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        author_data = {
+            'username': 'user',
+            'first_name': 'Sven',
+            'last_name': 'Pavlov',
+            'password': '111',
+        }
+        executor_data = {
+            'username': 'vanishe',
+            'first_name': 'Ivan',
+            'last_name': 'Ivanov',
+            'password': '111',
+        }
+        cls.author = User.objects.create(**author_data)
+        cls.executor = User.objects.create(**executor_data)
+        cls.status1 = StatusModel.objects.create(name='status1')
+        cls.status2 = StatusModel.objects.create(name='status2')
+        cls.label1 = LabelModel.objects.create(name='labels')
+        cls.label2 = LabelModel.objects.create(name='updated labels')
+
+        cls.task1_data = {
+            'name': 'Task1',
+            'description': 'This is task1',
+            'status': cls.status1,
+            'executor': cls.author,
+            'author': cls.author
+        }
+        cls.task2_data = {
+            'name': 'Task2',
+            'description': 'This is task2',
+            'status': cls.status2,
+            'executor': cls.executor,
+            'author': cls.author
+        }
+        cls.task3_data = {
+            'name': 'Task3',
+            'description': 'This is task3',
+            'status': cls.status1,
+            'executor': cls.author,
+            'author': cls.author
+        }
+        cls.task4_data = {
+            'name': 'Task4',
+            'description': 'This is task4',
+            'status': cls.status2,
+            'executor': cls.author,
+            'author': cls.executor
+        }
+        cls.task1 = TaskModel.objects.create(**cls.task1_data)
+        cls.task1.labels.add(cls.label1)
+        cls.task2 = TaskModel.objects.create(**cls.task2_data)
+        cls.task2.labels.add(cls.label1)
+        cls.task3 = TaskModel.objects.create(**cls.task3_data)
+        cls.task3.labels.add(cls.label2)
+        cls.task4 = TaskModel.objects.create(**cls.task4_data)
+        cls.task4.labels.add(cls.label2)
+
+    def setUp(self):
+        self.client._login(self.author)
+
+    def test_filter_tasks_status(self):
+        url = f'/tasks/?status={self.status1.id}&executor=&labels='
+        response = self.client.get(url)
+        count_records = len(response.context['object_list'].qs)
+        self.assertEqual(count_records, 2)
+
+    def test_filter_tasks_executor(self):
+        url = f'/tasks/?status=&executor={self.executor.id}&labels='
+        response = self.client.get(url)
+        count_records = len(response.context['object_list'].qs)
+        self.assertEqual(count_records, 1)
+
+    def test_filter_tasks_author(self):
+        url = '/tasks/?status=&executor=&labels=&author=on'
+        response = self.client.get(url)
+        count_records = len(response.context['object_list'].qs)
+        self.assertEqual(count_records, 3)
+
+    def test_filter_tasks_label(self):
+        url = f'/tasks/?status=&executor=&labels={self.label1.id}'
+        response = self.client.get(url)
+        count_records = len(response.context['object_list'].qs)
+        self.assertEqual(count_records, 2)
+
+    def test_filter_tasks_all(self):
+        url = f'/tasks/?status={self.status2.id}&executor={self.executor.id}' \
+              f'&labels={self.label1.id}&author=on'
+        response = self.client.get(url)
+        count_records = len(response.context['object_list'].qs)
+        self.assertEqual(count_records, 1)

@@ -1,7 +1,10 @@
-from django.test import TestCase
+from django import test
 
 
-class IndexViewTestCase(TestCase):
+@test.modify_settings(MIDDLEWARE={'remove': [
+    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
+]})
+class IndexViewTestCase(test.TestCase):
 
     def test_index_url(self):
         response = self.client.get('/')
