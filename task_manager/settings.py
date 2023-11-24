@@ -129,7 +129,7 @@ LANGUAGES = [
     ('ru', 'Russian')
 ]
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 LOCALE_PATHS = [
     BASE_DIR / 'task_manager' / 'locale',
