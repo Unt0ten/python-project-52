@@ -59,6 +59,8 @@ class UserFormDeleteView(
     success_url = 'users'
 
     def form_valid(self, form):
+        self.object = self.get_object()
+        self.object.delete()
         messages.success(
             self.request,
             _('User deleted successfully!'))
