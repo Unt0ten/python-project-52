@@ -373,7 +373,7 @@ msgstr "Пользователь успешно удален!"
 
 #: users/views.py:79
 msgid "You are logged in"
-msgstr "Вы авторизованы"
+msgstr "Вы залогинены"
 
 #: users/views.py:86
 msgid "You are logged out"
