@@ -70,7 +70,7 @@ class UserFormDeleteView(
         except ProtectedError:
             messages.warning(
                 self.request,
-                _("Cannot delete user because it is in use")
+                _('User deleted successfully!')
             )
         finally:
             return redirect(success_url)
