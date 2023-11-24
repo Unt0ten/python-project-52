@@ -2,6 +2,7 @@ from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.db.models import ProtectedError
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from django.views import View
@@ -58,6 +59,12 @@ class UserFormDeleteView(
     success_url = reverse_lazy('users')
 
     def form_valid(self, form):
+        if ProtectedError:
+            messages.warning(
+                self.request,
+                _("Cannot delete user because it is in use")
+            )
+            return redirect('users')
         messages.success(self.request, _('User deleted successfully!'))
         return super().form_valid(form)
 

@@ -10,7 +10,7 @@ class CustomAccessMixin:
         if request.user.pk != user_id:
             messages.warning(
                 request,
-                _("You don't have permission to change other user.")
+                _("You don't have permission to change other user")
             )
             return redirect('users')
 
