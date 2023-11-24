@@ -56,15 +56,15 @@ class UserFormDeleteView(
 ):
     model = User
     template_name = 'users/delete.html'
-    success_url = 'users'
+    success_url = reverse_lazy('users')
 
     def form_valid(self, form):
-        self.object = self.get_object()
-        self.object.delete()
+        # self.object = self.get_object()
+        # self.object.delete()
         messages.success(
             self.request,
             _('User deleted successfully!'))
-        return redirect('users')
+        return super().form_valid(form)
         # self.object = self.get_object()
         # success_url = self.get_success_url()
         # try:
