@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-22 22:07+0700\n"
+"POT-Creation-Date: 2023-11-24 17:19+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,15 +52,17 @@ msgstr "Вы не авторизованы! Пожалуйста, выполни
 
 #: statuses/views.py:25
 msgid "Status successfully created"
-msgstr "Статус успешно создан!"
+msgstr "Статус успешно создан"
 
 #: statuses/views.py:37
 msgid "Status successfully changed"
-msgstr "Статус успешно изменен!"
+msgstr "Статус успешно изменен"
 
 #: statuses/views.py:54
+#, fuzzy
+#| msgid "Status deleted successfully"
 msgid "Status deleted successfully!"
-msgstr "Статус успешно удален!"
+msgstr "Статус успешно удален"
 
 #: statuses/views.py:59
 msgid "Cannot delete status because it is in use"
@@ -128,15 +130,15 @@ msgstr "Только свои задачи"
 
 #: tasks/views.py:52
 msgid "Your task has been successfully created!"
-msgstr "Ваша задача успешно создана!"
+msgstr "Ваша задача успешно создана"
 
 #: tasks/views.py:64
 msgid "Task successfully changed"
-msgstr "Задача успешно изменена!"
+msgstr "Задача успешно изменена"
 
 #: tasks/views.py:75
 msgid "Task deleted successfully!"
-msgstr "Задача успешно удалена!"
+msgstr "Задача успешно удалена"
 
 #: templates/errors/404.html:10
 msgid "You won't find anything here("
@@ -361,15 +363,15 @@ msgstr "У вас нет прав на изменения другого пол�
 
 #: users/views.py:31
 msgid "Your profile has been successfully created!"
-msgstr "Ваш профиль успешно создан!"
+msgstr "Ваш профиль успешно создан"
 
 #: users/views.py:47
 msgid "User successfully changed"
-msgstr "Пользователь успешно изменен!"
+msgstr "Пользователь успешно изменен"
 
 #: users/views.py:61
 msgid "User deleted successfully!"
-msgstr "Пользователь успешно удален!"
+msgstr "Пользователь успешно удален"
 
 #: users/views.py:79
 msgid "You are logged in"
@@ -377,7 +379,7 @@ msgstr "Вы залогинены"
 
 #: users/views.py:86
 msgid "You are logged out"
-msgstr "Вы вышли из системы"
+msgstr "Вы разлогинены"
 
 #~ msgid "Your password must contain at least 3 characters."
 #~ msgstr "Ваш пароль должен содержать как минимум 3 символа."
