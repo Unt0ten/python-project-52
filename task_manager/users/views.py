@@ -59,21 +59,25 @@ class UserFormDeleteView(
     success_url = 'users'
 
     def form_valid(self, form):
-        self.object = self.get_object()
-        success_url = self.get_success_url()
-        try:
-            self.object.delete()
-            messages.success(
-                self.request,
-                _('User deleted successfully!')
-            )
-        except ProtectedError:
-            messages.warning(
-                self.request,
-                _('User deleted successfully!')
-            )
-        finally:
-            return redirect(success_url)
+        messages.success(
+            self.request,
+            _('User deleted successfully!'))
+        return redirect('users')
+        # self.object = self.get_object()
+        # success_url = self.get_success_url()
+        # try:
+        #     self.object.delete()
+        #     messages.success(
+        #         self.request,
+        #         _('User deleted successfully!')
+        #     )
+        # except ProtectedError:
+        #     messages.warning(
+        #         self.request,
+        #         _('User deleted successfully!')
+        #     )
+        # finally:
+        #     return redirect(success_url)
 
 
 class LoginUser(View):
