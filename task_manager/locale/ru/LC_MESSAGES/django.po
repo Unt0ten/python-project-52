@@ -169,7 +169,7 @@ msgstr "Пользователи"
 
 #: templates/header.html:17 templates/users/login.html:8
 msgid "Entrance"
-msgstr "Войти"
+msgstr "Вход"
 
 #: templates/header.html:19 templates/users/create.html:5
 #: templates/users/create.html:10
