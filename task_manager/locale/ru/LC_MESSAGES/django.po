@@ -307,7 +307,7 @@ msgstr "Просмотр задачи"
 
 #: templates/users/create.html:21
 msgid "Register"
-msgstr "Регистрация"
+msgstr "Зарегистрировать"
 
 #: templates/users/delete.html:4 templates/users/delete.html:7
 msgid "Deleting a user"
