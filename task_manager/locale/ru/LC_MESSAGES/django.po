@@ -192,7 +192,7 @@ msgstr "Задачи"
 
 #: templates/header.html:47
 msgid "Logout"
-msgstr "Выйти"
+msgstr "Выход"
 
 #: templates/index.html:10 templates/layout.html:10
 msgid "Task Manager"
