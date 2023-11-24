@@ -363,7 +363,7 @@ msgstr "У вас нет прав на изменения другого пол�
 
 #: users/views.py:31
 msgid "Your profile has been successfully created!"
-msgstr "Ваш профиль успешно создан"
+msgstr "Пользователь успешно зарегистрирован"
 
 #: users/views.py:47
 msgid "User successfully changed"
