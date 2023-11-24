@@ -1,5 +1,10 @@
 {% load i18n %}
 {% load static %}
+{% load django_bootstrap5 %}
+{% load django_bootstrap5 i18n static %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
 <!doctype html>
 <html lang="en" class="h-100">
@@ -42,7 +47,7 @@
 
   {% include 'header.html' %}
 
-  {% include 'messages.html' %}
+  {% block main_messages %}{% bootstrap_messages %}{% endblock %}
   <main>
   {% block main %}
   {% endblock main %}
