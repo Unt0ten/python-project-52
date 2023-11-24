@@ -238,7 +238,7 @@ msgstr "Вы уверены, что хотите удалить метку"
 #: templates/tasks/view_task.html:47 templates/users/delete.html:13
 #: templates/users/users.html:30
 msgid "Delete"
-msgstr "Удалить"
+msgstr "Да, удалить"
 
 #: templates/labels/labels.html:16 templates/statuses/statuses.html:16
 #: templates/tasks/tasks.html:30 templates/tasks/view_task.html:30
