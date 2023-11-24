@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-24 18:03+0700\n"
+"POT-Creation-Date: 2023-11-24 22:14+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -196,7 +196,7 @@ msgstr "Задачи"
 msgid "Logout"
 msgstr "Выход"
 
-#: templates/index.html:10 templates/layout.html:10
+#: templates/index.html:10 templates/layout.html:15
 msgid "Task Manager"
 msgstr "Менеджер задач"
 
@@ -361,8 +361,6 @@ msgid "Enter the same password as before, for verification."
 msgstr "Введите тот же пароль, что и раньше, для проверки."
 
 #: users/mixins.py:13
-#, fuzzy
-#| msgid "You don't have permission to change other user."
 msgid "You don't have permission to change other user"
 msgstr "У вас нет прав на изменения другого пользователя."
 
@@ -374,19 +372,19 @@ msgstr "Пользователь успешно зарегистрирован"
 msgid "User successfully changed"
 msgstr "Пользователь успешно изменен"
 
-#: users/views.py:65
+#: users/views.py:63
+msgid "User deleted successfully"
+msgstr "Пользователь успешно удален"
+
+#: users/views.py:68
 msgid "Cannot delete user because it is in use"
 msgstr "Невозможно удалить пользователя, потому что он используется"
 
-#: users/views.py:68
-msgid "User deleted successfully!"
-msgstr "Пользователь успешно удален"
-
-#: users/views.py:86
+#: users/views.py:121
 msgid "You are logged in"
 msgstr "Вы залогинены"
 
-#: users/views.py:93
+#: users/views.py:128
 msgid "You are logged out"
 msgstr "Вы разлогинены"
 
