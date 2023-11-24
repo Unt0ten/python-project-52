@@ -59,14 +59,21 @@ class UserFormDeleteView(
     success_url = reverse_lazy('users')
 
     def form_valid(self, form):
-        if ProtectedError:
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        try:
+            self.object.delete()
+            messages.success(
+                self.request,
+                _('User deleted successfully!')
+            )
+        except ProtectedError:
             messages.warning(
                 self.request,
                 _("Cannot delete user because it is in use")
             )
-            return redirect('users')
-        messages.success(self.request, _('User deleted successfully!'))
-        return super().form_valid(form)
+        finally:
+            return redirect(success_url)
 
 
 class LoginUser(View):
