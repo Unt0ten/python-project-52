@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-24 17:19+0700\n"
+"POT-Creation-Date: 2023-11-24 17:48+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -232,12 +232,9 @@ msgstr "Удаление метки"
 msgid "Are you sure you want to delete the label"
 msgstr "Вы уверены, что хотите удалить метку"
 
-#: templates/labels/delete.html:13 templates/labels/labels.html:30
-#: templates/statuses/delete.html:13 templates/statuses/statuses.html:30
-#: templates/tasks/delete.html:14 templates/tasks/tasks.html:46
-#: templates/tasks/view_task.html:47 templates/users/delete.html:13
-#: templates/users/users.html:30
-msgid "Delete"
+#: templates/labels/delete.html:13 templates/statuses/delete.html:13
+#: templates/tasks/delete.html:14 templates/users/delete.html:13
+msgid "Yes, delete"
 msgstr "Да, удалить"
 
 #: templates/labels/labels.html:16 templates/statuses/statuses.html:16
@@ -253,6 +250,12 @@ msgstr "Дата создания"
 #: templates/users/users.html:28
 msgid "Update"
 msgstr "Изменить"
+
+#: templates/labels/labels.html:30 templates/statuses/statuses.html:30
+#: templates/tasks/tasks.html:46 templates/tasks/view_task.html:47
+#: templates/users/users.html:30
+msgid "Delete"
+msgstr "Удалить"
 
 #: templates/labels/update.html:6
 msgid "Update label"

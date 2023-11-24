@@ -11,6 +11,6 @@
   <form action="{% url 'delete_task' object.id %}" method="post">
     {% csrf_token %}
       {{ form.as_p }}
-    <input class="btn btn-outline-danger my-2" type="submit" value="{% translate 'Delete' %}">
+    <input class="btn btn-outline-danger my-2" type="submit" value="{% translate 'Yes, delete' %}">
   </form>
 {% endblock main %}
