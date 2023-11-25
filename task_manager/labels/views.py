@@ -45,18 +45,13 @@ class DeleteLabel(CustomLoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('labels')
 
     def form_valid(self, form):
-        label_pk = self.kwargs.get('pk')
-        label = get_object_or_404(LabelModel, id=label_pk)
-        tasks = TaskModel.objects.filter(labels=label_pk)
-        if tasks:
+        label = self.object
+        task_status = TaskModel.objects.filter(author_id=label.id)
+        if task_status:
             messages.warning(
-                self.request,
-                _('Cannot remove label because it is in use')
+                self.request, _('Cannot remove label because it is in use')
             )
             return redirect('labels')
-        label.delete()
-        messages.success(
-            self.request,
-            _('Label deleted successfully!')
-        )
-        return redirect('labels')
+
+        messages.success(self.request, _('Label deleted successfully!'))
+        return super().form_valid(form)
