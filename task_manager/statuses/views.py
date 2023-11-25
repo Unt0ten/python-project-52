@@ -1,11 +1,10 @@
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.db.models import ProtectedError
 from django.utils.translation import gettext as _
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 
-from tasks.models import TaskModel
+from task_manager.tasks.models import TaskModel
 from .models import StatusModel
 from .forms import StatusModelForm
 from task_manager.mixins_login import CustomLoginRequiredMixin
