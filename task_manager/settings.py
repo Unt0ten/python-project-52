@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from distutils.util import strtobool
 from dotenv import load_dotenv
 import dj_database_url
 import os
@@ -27,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG')
+DEBUG = bool(strtobool(os.getenv('DEBUG')))
 
 LOCAL_HOST = os.getenv('HOST')
 
@@ -103,12 +104,23 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-DATABASE_URL = os.getenv('DATABASE_URL')
-
 DATABASES = {
-    'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
+    'default': dj_database_url.config(
+        default=os.getenv(
+            'DATABASE_URL',
+            'postgresql://postgres:postgres@localhost:5432/postgres'
+        ),
+        conn_max_age=600
+    )
 }
 
+SQLITE_SETTINGS = {
+    'ENGINE': 'django.db.backends.sqlite3',
+    'NAME': BASE_DIR / 'db.sqlite3',
+}
+
+if os.getenv('DB_ENGINE') == 'SQLite':
+    DATABASES['default'] = SQLITE_SETTINGS
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
