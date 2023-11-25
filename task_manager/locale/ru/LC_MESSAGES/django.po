@@ -59,8 +59,6 @@ msgid "Status successfully changed"
 msgstr "Статус успешно изменен"
 
 #: statuses/views.py:54
-#, fuzzy
-#| msgid "Status deleted successfully"
 msgid "Status deleted successfully!"
 msgstr "Статус успешно удален"
 

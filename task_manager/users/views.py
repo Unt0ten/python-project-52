@@ -67,17 +67,7 @@ class UserFormDeleteView(
                     self.request,
                     _('Cannot delete user because it is in use')
                 )
-            return redirect('users')
-        # try:
-        #     messages.success(self.request, _('User deleted successfully!'))
-        #     return super().form_valid(form)
-        # except ProtectedError:
-        #     messages.warning(
-        #             self.request,
-        #             _('Cannot delete user because it is in use')
-        #         )
-        #     return redirect('users')
-
+            return redirect(reverse_lazy('users'))
 
 
     # def form_valid(self, form):
