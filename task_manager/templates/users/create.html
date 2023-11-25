@@ -15,7 +15,6 @@
         <form action="{% url 'create_user' %}" method="post">
             {% csrf_token %}
 
-            {% bootstrap_form_errors form %}
             {% bootstrap_form form %}
 
             <input class="btn btn-outline-success my-2" type="submit" value="{% translate 'Register' %}">
