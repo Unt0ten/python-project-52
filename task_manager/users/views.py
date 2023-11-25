@@ -2,7 +2,6 @@ from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.db.models import ProtectedError
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from django.views import View
@@ -10,6 +9,7 @@ from django.utils.translation import gettext as _
 from django.urls import reverse_lazy
 
 from task_manager.mixins_login import CustomLoginRequiredMixin
+from task_manager.tasks.models import TaskModel
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .mixins import CustomAccessMixin
 
@@ -59,32 +59,17 @@ class UserFormDeleteView(
     success_url = reverse_lazy('users')
 
     def form_valid(self, form):
+        user = self.object
+        task_autor = TaskModel.objects.filter(author_id=user.id)
+        task_executor = TaskModel.objects.filter(executor_id=user.id)
+        if task_autor or task_executor:
+            messages.warning(
+                self.request, _('Cannot delete user because it is in use')
+            )
+            return redirect('users')
+
         messages.success(self.request, _('User deleted successfully'))
         return super().form_valid(form)
-
-
-    # def form_valid(self, form):
-        # self.object = self.get_object()
-        # self.object.delete()
-        # messages.success(
-        #     self.request,
-        #     _('User deleted successfully!'))
-        # return super().form_valid(form)
-        # self.object = self.get_object()
-        # success_url = self.get_success_url()
-        # try:
-        #     self.object.delete()
-        #     messages.success(
-        #         self.request,
-        #         _('User deleted successfully!')
-        #     )
-        # except ProtectedError:
-        #     messages.warning(
-        #         self.request,
-        #         _('User deleted successfully!')
-        #     )
-        # finally:
-        #     return redirect(success_url)
 
 
 class LoginUser(View):
