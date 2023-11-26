@@ -5,4 +5,3 @@ set -o errexit
 poetry install
 
 poetry run python manage.py collectstatic --no-input
-make compile
