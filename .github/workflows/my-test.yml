@@ -22,7 +22,7 @@ jobs:
         run: |
           pip install poetry
           make build
-          make migrate
+          poetry run python manage.py migrate
       - name: Run linter and tests
         run: |
           make lint
