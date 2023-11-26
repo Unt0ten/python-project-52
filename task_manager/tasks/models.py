@@ -36,6 +36,7 @@ class TaskModel(models.Model):
         on_delete=models.PROTECT,
         verbose_name=_('Executor'),
         related_name='executor',
+        null=True,
         blank=True,
         help_text=_('Select the task executor.'),
     )

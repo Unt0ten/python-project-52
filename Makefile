@@ -24,3 +24,9 @@ compile:
 
 tests:
 	poetry run python3 manage.py test task_manager.tests
+
+coverage:
+	poetry run coverage run --source='.' manage.py test task_manager.tests
+
+report:
+	poetry run coverage report
