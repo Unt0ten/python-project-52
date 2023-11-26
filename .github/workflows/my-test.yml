@@ -24,7 +24,7 @@ jobs:
           make build
           poetry run python manage.py migrate
       - name: Run linter and tests
-        env: SECRET_KEY = secret_key
+        env: SECRET_KEY = "secret_key"
         run: |
           make lint
           make tests
