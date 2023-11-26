@@ -49,7 +49,7 @@ class CreateTaskView(CustomLoginRequiredMixin, generic.CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         messages.success(
-            self.request, _('Your task has been successfully created!')
+            self.request, _('Task has been successfully created')
         )
         return super().form_valid(form)
 
