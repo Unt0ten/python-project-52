@@ -29,4 +29,4 @@ coverage:
 	poetry run coverage run --source='.' manage.py test task_manager.tests
 
 report:
-	poetry run coverage report
+	poetry run coverage xml
