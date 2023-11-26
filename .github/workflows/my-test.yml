@@ -19,6 +19,8 @@ jobs:
           python-version: ${{ matrix.python-version }}
         # make depends on poetry
       - name: Install dependencies
+        env:
+          SECRET_KEY: secret_key
         run: |
           pip install poetry
           make build
