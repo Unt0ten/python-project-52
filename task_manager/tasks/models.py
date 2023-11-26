@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 from task_manager.statuses.models import StatusModel
 from task_manager.labels.models import LabelModel
+from task_manager.users.models import Person
 
 
 class TaskModel(models.Model):
@@ -32,15 +33,15 @@ class TaskModel(models.Model):
         help_text=_('Obligatory field. Select one of the task statuses.')
     )
     executor = models.ForeignKey(
-        User,
+        Person,
         on_delete=models.PROTECT,
         verbose_name=_('Executor'),
-        # related_name='executor',
+        related_name='executor',
         blank=True,
-        help_text=_('Select the task executor.')
+        help_text=_('Select the task executor.'),
     )
     author = models.ForeignKey(
-        User,
+        Person,
         on_delete=models.PROTECT,
         verbose_name=_('Author'),
         related_name='author'
