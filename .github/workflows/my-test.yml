@@ -37,7 +37,7 @@ jobs:
         uses: paambaati/codeclimate-action@v3.2.0
         if: github.ref_name == 'main'
         env:
-#          SECRET_KEY: secret_key
+          SECRET_KEY: secret_key
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
           coverageCommand:
