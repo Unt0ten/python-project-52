@@ -1,10 +1,11 @@
 [tool.poetry]
 name = "hexlet-code"
 version = "0.1.0"
-description = ""
+description = "Is system that allows you to set tasks, assign performers and change their statuses. To work with the system you need registration and authentication."
 authors = ["Alexandr Sakhatov <sakhatoff@gmail.com>"]
 readme = "README.md"
 packages = [{include = "task_manager"}]
+repository = "https://github.com/Unt0ten/python-project-52"
 
 [tool.poetry.dependencies]
 python = "^3.10"

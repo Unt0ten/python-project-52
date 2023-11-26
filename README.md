@@ -3,9 +3,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/88408d52d4652e35e89c/maintainability)](https://codeclimate.com/github/Unt0ten/python-project-52/maintainability)
 
 ### Description
-[Task Manager](https://task-manager-6iez.onrender.com) is system that allows you to set tasks, assign performers and "
-"change their statuses. To work with the system you need registration and "
-"authentication.
+[Task Manager](https://task-manager-6iez.onrender.com) is system that allows you to set tasks, assign performers and change their statuses. To work with the system you need registration and authentication.
 
 ### Requirement
 * Python
