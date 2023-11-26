@@ -42,5 +42,4 @@ jobs:
         with:
           coverageCommand:
             make coverage
-            make report
           debug: true
