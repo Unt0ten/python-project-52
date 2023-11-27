@@ -4,6 +4,10 @@ from django.shortcuts import reverse
 from django.core.exceptions import ObjectDoesNotExist
 
 
+from task_manager.tasks.models import TaskModel
+from task_manager.statuses.models import StatusModel
+
+
 @test.modify_settings(MIDDLEWARE={'remove': [
     'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
 ]})
@@ -141,3 +145,31 @@ class UsersCUDTestCase(test.TestCase):
         deleted_user_pk = self.changeable_user.id
         response = self.client.get(f'/users/{deleted_user_pk}/delete/')
         self.assertRedirects(response, '/users/')
+
+    def test_delete_task_author(self):
+        self.client._login(self.changeable_user)
+        TaskModel.objects.create(
+            name='Task',
+            description='Description',
+            status=StatusModel.objects.create(name='status'),
+            author=self.changeable_user,
+        )
+        url = reverse('delete_user', kwargs={'pk': self.changeable_user.id})
+        response = self.client.post(url)
+        self.assertRedirects(response, '/users/')
+        self.assertEqual(self.changeable_user.username, 'Loki')
+
+    def test_delete_task_executor(self):
+        self.client._login(self.changeable_user)
+        executor = User.objects.create(**self.user_data)
+        TaskModel.objects.create(
+            name='Task',
+            description='Description',
+            status=StatusModel.objects.create(name='status'),
+            author=self.changeable_user,
+            executor=executor
+        )
+        url = reverse('delete_user', kwargs={'pk': executor.id})
+        response = self.client.post(url)
+        self.assertRedirects(response, '/users/')
+        self.assertEqual(executor.username, 'vanishe')

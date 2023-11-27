@@ -4,6 +4,8 @@ from django.shortcuts import reverse
 from django.core.exceptions import ObjectDoesNotExist
 
 from task_manager.labels.models import LabelModel
+from task_manager.tasks.models import TaskModel
+from task_manager.statuses.models import StatusModel
 
 
 @test.modify_settings(MIDDLEWARE={'remove': [
@@ -62,10 +64,24 @@ class LabelsCUDTestCase(test.TestCase):
         update_label = LabelModel.objects.get(id=label.id)
         self.assertEqual(update_label.name, 'UltraHard work')
 
-    def test_delete_status(self):
+    def test_delete_label_success(self):
         label = LabelModel.objects.create(**self.name_label)
         url = reverse('delete_label', kwargs={'pk': label.id})
         self.client.post(url)
 
         with self.assertRaises(ObjectDoesNotExist):
             LabelModel.objects.get(id=label.id)
+
+    def test_delete_label_protect(self):
+        label = LabelModel.objects.create(**self.name_label)
+        task = TaskModel.objects.create(
+            name='Task',
+            description='Description',
+            status=StatusModel.objects.create(name='Status'),
+            author=self.user,
+        )
+        task.labels.add(label)
+        url = reverse('delete_label', kwargs={'pk': label.id})
+        response = self.client.post(url)
+        self.assertRedirects(response, '/labels/')
+        self.assertEqual(label.name, 'Hard work')

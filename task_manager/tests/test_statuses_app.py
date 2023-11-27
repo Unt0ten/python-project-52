@@ -4,6 +4,7 @@ from django.shortcuts import reverse
 from django.core.exceptions import ObjectDoesNotExist
 
 from task_manager.statuses.models import StatusModel
+from task_manager.tasks.models import TaskModel
 
 
 @test.modify_settings(MIDDLEWARE={'remove': [
@@ -62,10 +63,23 @@ class StatusesCUDTestCase(test.TestCase):
         update_status = StatusModel.objects.get(id=status.id)
         self.assertEqual(update_status.name, 'UltraHard work')
 
-    def test_delete_status(self):
+    def test_delete_status_success(self):
         status = StatusModel.objects.create(**self.name_status)
         url = reverse('delete_status', kwargs={'pk': status.id})
         self.client.post(url)
 
         with self.assertRaises(ObjectDoesNotExist):
             StatusModel.objects.get(id=status.id)
+
+    def test_delete_status_protect(self):
+        status = StatusModel.objects.create(**self.name_status)
+        TaskModel.objects.create(
+            name='Task',
+            description='Description',
+            status=status,
+            author=self.user,
+        )
+        url = reverse('delete_status', kwargs={'pk': status.id})
+        response = self.client.post(url)
+        self.assertRedirects(response, '/statuses/')
+        self.assertEqual(status.name, 'Hard work')
