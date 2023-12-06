@@ -1,16 +1,8 @@
-{% extends 'layout.html' %}
+{% extends 'base_crud.html' %}
 {% load i18n %}
-{% load static %}
+
 {% block title %}{% translate 'Deleting a user' %}{% endblock %}
-{% block main %}
-
-  <h1 class="my-4 ">{% translate 'Deleting a user' %}</h1>
-  <p>{% translate 'Are you sure you want to delete the user' %} {{ object.username }}?</p>
-
-  <form action="{% url 'delete_user' object.id %}" method="post">
-    {% csrf_token %}
-      {{ form.as_p }}
-    <input class="btn btn-outline-danger my-2" type="submit" value="{% translate 'Yes, delete' %}">
-  </form>
-
-{% endblock %}
+{% block h1 %}{% translate 'Deleting a user' %}{% endblock %}
+{% block text %}<p>{% translate 'Are you sure you want to delete the user' %} {{ object.username }}?</p>{% endblock %}
+{% block url %}{% url 'delete_user' object.id %}{% endblock %}
+{% block submit %}<input class="btn btn-outline-danger my-2" type="submit" value="{% translate 'Yes, delete' %}">{% endblock %}

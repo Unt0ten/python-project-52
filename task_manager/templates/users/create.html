@@ -1,23 +1,8 @@
-{% extends 'layout.html' %}
+{% extends 'base_crud.html' %}
 {% load i18n %}
-{% load static %}
-{% load django_bootstrap5 %}
+
 {% block title %}{% translate 'Registration' %}{% endblock %}
+{% block h1 %}{% translate 'Registration' %}{% endblock %}
+{% block url %}{% url 'create_user' %}{% endblock %}
+{% block submit %}<input class="btn btn-outline-success my-2" type="submit" value="{% translate 'Register' %}">{% endblock %}
 
-{% block main %}
-
-
-    <h1>{% translate 'Registration' %}</h1>
-
-    <div class="container wrapper flex-grow-1">
-
-
-        <form action="{% url 'create_user' %}" method="post">
-            {% csrf_token %}
-
-            {% bootstrap_form form %}
-
-            <input class="btn btn-outline-success my-2" type="submit" value="{% translate 'Register' %}">
-        </form>
-    </div>
-{% endblock main %}

@@ -1,16 +1,7 @@
-{% extends 'layout.html' %}
+{% extends 'base_crud.html' %}
 {% load i18n %}
-{% load static %}
-{% load django_bootstrap5 %}
 
 {% block title %}{% translate 'Update task' %}{% endblock %}
-
-{% block main %}
-
-    <h1 class="my-4">{% translate 'Update task' %}</h1>
-    <form action="{% url 'update_task' object.id %}" method="post">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        <input class="btn btn-outline-success my-2" type="submit" value="{% translate 'Update' %}">
-    </form>
-{% endblock main %}
+{% block h1 %}{% translate 'Update task' %}{% endblock %}
+{% block url %}{% url 'update_task' object.id %}{% endblock %}
+{% block submit %}<input class="btn btn-outline-success my-2" type="submit" value="{% translate 'Update' %}">{% endblock %}

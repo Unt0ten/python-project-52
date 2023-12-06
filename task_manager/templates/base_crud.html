@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% load django_bootstrap5 i18n %}
+
+{% block title %}{% endblock %}
+
+{% block main %}
+
+
+    <h1 class="my-4">{% block h1 %}{% endblock %}</h1>
+
+    {% block text %}{% endblock %}
+
+    <div class="container wrapper flex-grow-1">
+
+        <form action="{% block url %}{% endblock %}" method="post">
+            {% csrf_token %}
+
+            {% bootstrap_form form %}
+
+            {% block submit %}<input class="btn btn-outline-success my-2" type="submit" value="{% translate 'Create' %}">{% endblock %}
+        </form>
+    </div>
+{% endblock main %}

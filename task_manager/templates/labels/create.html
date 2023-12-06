@@ -1,17 +1,6 @@
-{% extends 'layout.html' %}
+{% extends 'base_crud.html' %}
 {% load i18n %}
-{% load static %}
-{% load django_bootstrap5 %}
 
 {% block title %}{% translate 'Create label' %}{% endblock %}
-
-{% block main %}
-    <h1>{% translate 'Create label' %}</h1>
-    <form action="{% url 'create_label' %}" method="post">
-        {% csrf_token %}
-
-        {% bootstrap_form form %}
-
-        <input class="btn btn-outline-success my-2" type="submit" value="{% translate 'Create' %}">
-    </form>
-{% endblock %}
+{% block h1 %}{% translate 'Create label' %}{% endblock %}
+{% block url %}{% url 'create_label' %}{% endblock %}
