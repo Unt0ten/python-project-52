@@ -5,7 +5,7 @@ from .models import LabelModel
 
 
 @admin.register(LabelModel)
-class CustomUserAdmin(admin.ModelAdmin):
+class LabelAdmin(admin.ModelAdmin):
     list_display = ('name',
                     'created_at')
     search_fields = ['name', 'created_at']

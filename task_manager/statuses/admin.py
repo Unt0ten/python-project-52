@@ -5,7 +5,7 @@ from .models import StatusModel
 
 
 @admin.register(StatusModel)
-class CustomUserAdmin(admin.ModelAdmin):
+class StatusAdmin(admin.ModelAdmin):
     list_display = ('name',
                     'created_at')
     search_fields = ['name', 'created_at']

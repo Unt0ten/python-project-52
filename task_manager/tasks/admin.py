@@ -5,7 +5,7 @@ from .models import TaskModel
 
 
 @admin.register(TaskModel)
-class CustomUserAdmin(admin.ModelAdmin):
+class TaskAdmin(admin.ModelAdmin):
     list_display = (
         'name',
         'description',
