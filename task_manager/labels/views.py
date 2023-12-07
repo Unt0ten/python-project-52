@@ -1,13 +1,11 @@
 from django.contrib import messages
-from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 
 from .models import LabelModel
 from .forms import LabelModelForm
-from task_manager.mixins_login import CustomLoginRequiredMixin
-from task_manager.tasks.models import TaskModel
+from task_manager.mixins import CustomLoginRequiredMixin, CheckDependencyMixin
 
 
 class LabelsView(CustomLoginRequiredMixin, ListView):
@@ -39,19 +37,10 @@ class UpdateLabel(CustomLoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
 
-class DeleteLabel(CustomLoginRequiredMixin, DeleteView):
+class DeleteLabel(CustomLoginRequiredMixin, CheckDependencyMixin, DeleteView):
     model = LabelModel
     template_name = 'labels/delete.html'
     success_url = reverse_lazy('labels')
-
-    def form_valid(self, form):
-        label = self.object
-        task_status = TaskModel.objects.filter(author_id=label.id)
-        if task_status:
-            messages.warning(
-                self.request, _('Cannot remove label because it is in use')
-            )
-            return redirect('labels')
-
-        messages.success(self.request, _('Label deleted successfully!'))
-        return super().form_valid(form)
+    msg_success = 'Label deleted successfully!'
+    msg_error = 'Cannot remove label because it is in use'
+    url_redirect = 'labels'

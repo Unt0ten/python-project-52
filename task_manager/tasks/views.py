@@ -6,7 +6,7 @@ from django.utils.translation import gettext as _
 
 from task_manager.statuses.models import StatusModel
 from task_manager.labels.models import LabelModel
-from task_manager.mixins_login import CustomLoginRequiredMixin
+from task_manager.mixins import CustomLoginRequiredMixin
 from .models import TaskModel
 from .forms import TaskModelForm
 from .mixins import CustomAccessMixin

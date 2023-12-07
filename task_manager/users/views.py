@@ -8,7 +8,7 @@ from django.views import View
 from django.utils.translation import gettext as _
 from django.urls import reverse_lazy
 
-from task_manager.mixins_login import CustomLoginRequiredMixin
+from task_manager.mixins import CustomLoginRequiredMixin
 from task_manager.tasks.models import TaskModel
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .mixins import CustomAccessMixin
